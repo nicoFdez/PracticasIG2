@@ -19,7 +19,7 @@ mono_crash.*
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
+Practica0/ProyectosOGREvc15x86/IG2App/[Rr]elease/
 [Rr]eleases/
 x64/
 x86/
