@@ -91,7 +91,7 @@ void IG2App::setupScene(void)
 
   // finally something to render
 
-  Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+  Ogre::Entity* ent = mSM->createEntity("facial.mesh");
 
   mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
   mSinbadNode->attachObject(ent);

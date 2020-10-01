@@ -118,6 +118,7 @@ namespace OgreBites {
 
 		// adds context as listener to process context-level (above the sample level) events
 		mRoot->addFrameListener(this);
+		//mRoot->showConfigDialog(OgreBites::getNativeConfigDialog());
 	}
 
 	bool IG2ApplicationContext::oneTimeConfig()
