@@ -15,17 +15,25 @@ public:
   virtual ~IG2App() { };   // delete -> shutdown()  
  
 protected:
+  void createObjects();
+
   virtual void setup();
   virtual void shutdown();
   virtual void setupScene();
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
+  int id = 1;
+
+  Ogre::SceneNode* mHourNode[12];
+  Ogre::SceneNode* mSpheresNode = nullptr;
+  Ogre::SceneNode* mClockNode = nullptr;
+  Ogre::SceneNode* mSinbadNode = nullptr;
+
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
   Ogre::SceneNode* mLightNode = nullptr;
   Ogre::SceneNode* mCamNode = nullptr;
-  Ogre::SceneNode* mSinbadNode = nullptr;
   OgreBites::CameraMan* mCamMgr = nullptr;
  
 };
