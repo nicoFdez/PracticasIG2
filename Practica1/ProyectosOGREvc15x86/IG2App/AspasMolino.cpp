@@ -2,7 +2,6 @@
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
-#include "IG2ApplicationContext.h"
 
 AspasMolino::AspasMolino(Ogre::SceneManager* mSM, int numAspas) : numAspas(numAspas)
 {
