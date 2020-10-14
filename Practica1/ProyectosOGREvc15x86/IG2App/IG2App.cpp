@@ -15,12 +15,12 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 		getRoot()->queueEndRendering();
 		break;
 	case SDLK_g:
-		if (id == 1) //Clock solo existe en la escena con id = 1
-			mSM->getSceneNode("Clock")->roll(Ogre::Degree(-1.0));
-		break;
-	case SDLK_h:
-		if(id == 1)
-			mSM->getSceneNode("Spheres")->roll(Ogre::Degree(-1.0));
+		if (id == 0) { //Clock solo existe en la escena con id = 1
+			mSM->getSceneNode("aspas")->roll(Ogre::Degree(1.0));
+			for (int i = 0; i < num; ++i) {
+				mSM->getSceneNode("adorno_" + std::to_string(i))->roll(Ogre::Degree(-1.0));
+			}
+		}
 		break;
 	default:
 		break;
@@ -38,6 +38,7 @@ void IG2App::shutdown()
 
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
+  delete aspasMolino;
   
   // do not forget to call the base 
   IG2ApplicationContext::shutdown();
@@ -48,94 +49,37 @@ void IG2App::createObjects()
 	switch (id)
 	{
 	case 0: {
-		Ogre::Entity* ent = mSM->createEntity("Sinbad.mesh");
+		Ogre::Entity* ent;
+		aspas = mSM->getRootSceneNode()->createChildSceneNode("aspas");
 
-		mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nSinbad");
-		mSinbadNode->attachObject(ent);
+		for (int i = 0; i < num; ++i) {
+			aspaNode = aspas->createChildSceneNode("aspa_" + std::to_string(i));
+			tableroNode = aspaNode->createChildSceneNode("tablero_" + std::to_string(i));
+			cilindroNode = aspaNode->createChildSceneNode("adorno_" + std::to_string(i));
 
-		mSinbadNode->setPosition(0, 20, 0);
-		mSinbadNode->setScale(20, 20, 20);
-		//mSinbadNode->yaw(Ogre::Degree(-45));
-		//mSinbadNode->showBoundingBox(true);
-		//mSinbadNode->setVisible(false);
+			aspaNode->roll(Ogre::Degree(-90.0 * i / 3.0));
 
-		ent = mSM->createEntity("RomanBathLower.mesh");
+			ent = mSM->createEntity("cube.mesh");
+			tableroNode->attachObject(ent);
+			tableroNode->setPosition(200, 0, 0);
+			tableroNode->scale(5, 1, 0.1);
 
-		mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nRomanoBath");
-		mSinbadNode->attachObject(ent);
-
-		//mSinbadNode->setPosition(400, 100, -300);
-		//mSinbadNode->setScale(20, 20, 20);
-		//mSinbadNode->yaw(Ogre::Degree(-45));
-		//mSinbadNode->showBoundingBox(true);
-		//mSinbadNode->setVisible(false);
-
-		ent = mSM->createEntity("RomanBathUpper.mesh");
-
-		//mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nRomanoUpper");
-		mSinbadNode->attachObject(ent);
-
-		//mSinbadNode->setPosition(400, 100, -300);
-		//mSinbadNode->setScale(20, 20, 20);
-		//mSinbadNode->yaw(Ogre::Degree(-45));
-		//mSinbadNode->showBoundingBox(true);
-		//mSinbadNode->setVisible(false);
-
-		ent = mSM->createEntity("Columns.mesh");
-
-		//mSinbadNode = mSM->getRootSceneNode()->createChildSceneNode("nRomanoColumns");
-		mSinbadNode->attachObject(ent);
-
-		//mSinbadNode->setPosition(400, 100, -300);
-		//mSinbadNode->setScale(20, 20, 20);
-		//mSinbadNode->yaw(Ogre::Degree(-45));
-		//mSinbadNode->showBoundingBox(true);
-		//mSinbadNode->setVisible(false);
-
+			ent = mSM->createEntity("column.mesh");
+			cilindroNode->attachObject(ent);
+			cilindroNode->scale(0.5, 0.2, 0.5);
+			cilindroNode->roll(Ogre::Degree(90.0 * i / 3.0));
+			cilindroNode->setPosition(400, 0, 10);
+		}
 		break;
 	}
 	case 1: {
-		Ogre::Entity* ent;
-		mClockNode = mSM->getRootSceneNode()->createChildSceneNode("Clock");
-		mSpheresNode = mClockNode->createChildSceneNode("Spheres");
-		//Las bolitas
-		for (int i = 0; i < 12; ++i) {
-			ent = mSM->createEntity("sphere.mesh");
-			Ogre::SceneNode* hijo = mSpheresNode->createChildSceneNode("Hora " + std::to_string(i + 1));
-			hijo->attachObject(ent);
-			hijo->setPosition(500 * Ogre::Math::Sin((Math::PI * i / 6)), 500 * Ogre::Math::Cos((Math::PI * i / 6)), 0);
-			mHourNode[i] = hijo;
+		aspasMolino = new AspasMolino(mSM, num);
+		addInputListener(aspasMolino);
+
+		Aspa** arrayAspas = aspasMolino->getArrayAspas();
+		for (int i = 0; i < num; ++i) {
+			addInputListener(arrayAspas[i]);
 		}
-
-		//Bolita pequeña - bolita grande
-		for (int i = 1; i <= 12; i+=2) {
-			mSM->getSceneNode("Hora " + std::to_string(i))->setScale(0.5, 0.5, 0.5);
-		}
-
-		//Las agujitas
-		//Horas
-		Ogre::SceneNode* agujas = mClockNode->createChildSceneNode("Aguja horas");
-		ent = mSM->createEntity("cube.mesh");
-		agujas->attachObject(ent);
-		agujas->setPosition(100, 0, 0);
-		agujas->setScale(0.25, 3, 0.25);
-		agujas->roll(Ogre::Degree(-90.0));
-
-		//Minutos
-		agujas = mClockNode->createChildSceneNode("Aguja minutos");
-		ent = mSM->createEntity("cube.mesh");
-		agujas->attachObject(ent);
-		agujas->setPosition(0, 150, 0);
-		agujas->setScale(0.15, 4, 0.15);
-
-		//Segundos
-		agujas = mClockNode->createChildSceneNode("Aguja segundos");
-		ent = mSM->createEntity("cube.mesh");
-		agujas->attachObject(ent);
-		agujas->setPosition(150 * Ogre::Math::Sin(8 * Math::PI / 6), 150 * Ogre::Math::Cos(8 * Math::PI / 6), 0);
-		agujas->setScale(0.05, 4, 0.05);
-		agujas->roll(Ogre::Degree(120.0));
-
 		break;
 	}
 	default:

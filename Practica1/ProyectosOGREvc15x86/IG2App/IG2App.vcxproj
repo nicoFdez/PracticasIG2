@@ -119,10 +119,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Aspa.h" />
+    <ClInclude Include="AspasMolino.h" />
     <ClInclude Include="IG2ApplicationContext.h" />
     <ClInclude Include="IG2App.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Aspa.cpp" />
+    <ClCompile Include="AspasMolino.cpp" />
     <ClCompile Include="IG2ApplicationContext.cpp" />
     <ClCompile Include="IG2Main.cpp" />
     <ClCompile Include="IG2App.cpp" />

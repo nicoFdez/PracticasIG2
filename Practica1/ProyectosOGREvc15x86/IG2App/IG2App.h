@@ -7,6 +7,8 @@
 #include <OgreTrays.h>
 #include <OgreCameraMan.h>
 
+#include "AspasMolino.h"
+
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
 {
@@ -24,11 +26,14 @@ protected:
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
   int id = 1;
+  //Usados cuando id = 0
+      Ogre::SceneNode* aspas = nullptr, 
+          *aspaNode = nullptr, 
+          *tableroNode = nullptr, 
+          *cilindroNode = nullptr;
+      int num = 12;
 
-  Ogre::SceneNode* mHourNode[12];
-  Ogre::SceneNode* mSpheresNode = nullptr;
-  Ogre::SceneNode* mClockNode = nullptr;
-  Ogre::SceneNode* mSinbadNode = nullptr;
+  AspasMolino* aspasMolino = nullptr;
 
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    
