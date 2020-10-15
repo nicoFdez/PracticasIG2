@@ -64,9 +64,9 @@ void IG2App::createObjects()
 			tableroNode->setPosition(200, 0, 0);
 			tableroNode->scale(5, 1, 0.1);
 
-			ent = mSM->createEntity("column.mesh");
+			ent = mSM->createEntity("Barrel.mesh");
 			cilindroNode->attachObject(ent);
-			cilindroNode->scale(0.5, 0.2, 0.5);
+			cilindroNode->scale(5, 12, 5);
 			cilindroNode->roll(Ogre::Degree(90.0 * i / 3.0));
 			cilindroNode->setPosition(400, 0, 10);
 		}
