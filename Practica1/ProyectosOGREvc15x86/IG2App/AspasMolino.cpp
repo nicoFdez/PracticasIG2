@@ -3,10 +3,10 @@
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
 
-AspasMolino::AspasMolino(Ogre::SceneManager* mSM, int numAspas) : numAspas(numAspas)
+AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas) : numAspas(numAspas)
 {
 	Ogre::Entity* ent;
-	aspasNode = mSM->getRootSceneNode()->createChildSceneNode("aspas");
+	aspasNode = rootNode->createChildSceneNode("aspas");
 
 	arrayAspas = new Aspa*[numAspas];
 
@@ -17,16 +17,29 @@ AspasMolino::AspasMolino(Ogre::SceneManager* mSM, int numAspas) : numAspas(numAs
 
 		arrayAspas[i] = new Aspa(aspaNode, tableroNode, cilindroNode);
 		
-		aspaNode->roll(Ogre::Degree(-90.0 * i / 3.0));
-		cilindroNode->roll(Ogre::Degree(90.0 * i / 3.0));
+		aspaNode->roll(Ogre::Degree(-360.0/numAspas * i));
+		cilindroNode->roll(Ogre::Degree(360.0 / numAspas * i));
 	}
 }
 
-bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
+void AspasMolino::move()
 {
-	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
-	{
-		aspasNode->roll(Ogre::Degree(1.0));
+	aspasNode->roll(Ogre::Degree(1.0));
+	for (int i = 0; i < numAspas; ++i) {
+		arrayAspas[i]->move();
 	}
-	return true;
 }
+
+
+
+//bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
+//{
+//	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
+//	{
+//		aspasNode->roll(Ogre::Degree(1.0));
+//		for (int i = 0; i < numAspas; ++i) {
+//			arrayAspas[i]->move();
+//		}
+//	}
+//	return true;
+//}

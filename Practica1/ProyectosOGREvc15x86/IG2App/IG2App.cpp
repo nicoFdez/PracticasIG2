@@ -38,7 +38,8 @@ void IG2App::shutdown()
 
   delete mTrayMgr;  mTrayMgr = nullptr;
   delete mCamMgr; mCamMgr = nullptr;
-  delete aspasMolino;
+  delete aspasMolino; aspasMolino = nullptr;
+  delete molino; molino = nullptr;
   
   // do not forget to call the base 
   IG2ApplicationContext::shutdown();
@@ -57,7 +58,7 @@ void IG2App::createObjects()
 			tableroNode = aspaNode->createChildSceneNode("tablero_" + std::to_string(i));
 			cilindroNode = aspaNode->createChildSceneNode("adorno_" + std::to_string(i));
 
-			aspaNode->roll(Ogre::Degree(-90.0 * i / 3.0));
+			aspaNode->roll(Ogre::Degree(-360.0 / num * i));
 
 			ent = mSM->createEntity("cube.mesh");
 			tableroNode->attachObject(ent);
@@ -67,19 +68,24 @@ void IG2App::createObjects()
 			ent = mSM->createEntity("Barrel.mesh");
 			cilindroNode->attachObject(ent);
 			cilindroNode->scale(5, 12, 5);
-			cilindroNode->roll(Ogre::Degree(90.0 * i / 3.0));
+			cilindroNode->roll(Ogre::Degree(360.0/num * i));
 			cilindroNode->setPosition(400, 0, 10);
 		}
 		break;
 	}
 	case 1: {
-		aspasMolino = new AspasMolino(mSM, num);
-		addInputListener(aspasMolino);
+		aspasMolino = new AspasMolino(mSM->getRootSceneNode(), num);
+		//addInputListener(aspasMolino);
 
-		Aspa** arrayAspas = aspasMolino->getArrayAspas();
+		/*Aspa** arrayAspas = aspasMolino->getArrayAspas();
 		for (int i = 0; i < num; ++i) {
 			addInputListener(arrayAspas[i]);
-		}
+		}*/
+		break;
+	}
+	case 2: {
+		molino = new Molino(mSM->getRootSceneNode(), num);
+		addInputListener(molino);
 		break;
 	}
 	default:

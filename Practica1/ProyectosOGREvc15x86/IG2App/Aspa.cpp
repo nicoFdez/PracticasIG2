@@ -25,11 +25,16 @@ Aspa::Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneN
 
 }
 
-bool Aspa::keyPressed(const OgreBites::KeyboardEvent& evt)
+void Aspa::move()
 {
-	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
-	{
-		cilindroNode->roll(Ogre::Degree(-1.0));
-	}
-	return true;
+	cilindroNode->roll(Ogre::Degree(-1.0));
 }
+
+//bool Aspa::keyPressed(const OgreBites::KeyboardEvent& evt)
+//{
+//	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
+//	{
+//		cilindroNode->roll(Ogre::Degree(-1.0));
+//	}
+//	return true;
+//}
