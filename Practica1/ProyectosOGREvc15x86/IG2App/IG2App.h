@@ -32,7 +32,7 @@ protected:
           *aspaNode = nullptr, 
           *tableroNode = nullptr, 
           *cilindroNode = nullptr;
-      int num = 5;
+      int num = 12;
 
   AspasMolino* aspasMolino = nullptr;
   Molino* molino = nullptr;

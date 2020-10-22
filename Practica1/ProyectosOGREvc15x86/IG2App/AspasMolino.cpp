@@ -6,7 +6,13 @@
 AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas) : numAspas(numAspas)
 {
 	Ogre::Entity* ent;
-	aspasNode = rootNode->createChildSceneNode("aspas");
+	if(modoGiro == 0)
+		aspasNode = rootNode->createChildSceneNode("aspas");
+	else {
+		nodoFicticio = rootNode->createChildSceneNode("molino_aspas_ficticio");
+		nodoFicticio->setPosition(0, 0, 0);
+		aspasNode = nodoFicticio->createChildSceneNode("aspas");
+	}
 
 	arrayAspas = new Aspa*[numAspas];
 
@@ -20,6 +26,16 @@ AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas) : numAspas(num
 		aspaNode->roll(Ogre::Degree(-360.0/numAspas * i));
 		cilindroNode->roll(Ogre::Degree(360.0 / numAspas * i));
 	}
+
+	ejeNode = aspasNode->createChildSceneNode("ejeAspasMolino");
+
+	Ogre::SceneManager* mSM = aspasNode->getCreator();
+
+	ent = mSM->createEntity("Barrel.mesh");
+	ejeNode->attachObject(ent);
+	ejeNode->pitch(Ogre::Degree(90.0));
+	ejeNode->scale(20, 10, 20);
+	ejeNode->setPosition(0, 0, 0);
 }
 
 void AspasMolino::move()
@@ -27,6 +43,26 @@ void AspasMolino::move()
 	aspasNode->roll(Ogre::Degree(1.0));
 	for (int i = 0; i < numAspas; ++i) {
 		arrayAspas[i]->move();
+	}
+}
+
+void AspasMolino::moveAxis()
+{
+	ejeNode->setPosition({ 0, 0, -25 });
+}
+
+void AspasMolino::rotate()
+{
+	if (modoGiro == 0) { //truco
+		aspasNode->setPosition(0, aspasNode->getPosition().y, 0);
+		aspasNode->yaw(Ogre::Degree(2), Ogre::Node::TS_PARENT);
+		rotationY += 2;
+		aspasNode->setPosition(250 * sin(rotationY * 2 * Ogre::Math::PI / 360), 
+							   aspasNode->getPosition().y, 
+							   250 * cos(rotationY * 2 * Ogre::Math::PI / 360 ));
+	}
+	else { //Nodo ficticio
+		nodoFicticio->yaw(Ogre::Degree(2));
 	}
 }
 
