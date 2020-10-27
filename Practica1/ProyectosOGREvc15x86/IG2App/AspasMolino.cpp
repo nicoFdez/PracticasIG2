@@ -3,23 +3,23 @@
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
 
-AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas) : numAspas(numAspas)
+AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas, int number) : numAspas(numAspas)
 {
 	Ogre::Entity* ent;
 	if(modoGiro == 0)
-		aspasNode = rootNode->createChildSceneNode("aspas");
+		aspasNode = rootNode->createChildSceneNode("aspas" + std::to_string(number));
 	else {
-		nodoFicticio = rootNode->createChildSceneNode("molino_aspas_ficticio");
+		nodoFicticio = rootNode->createChildSceneNode("molino_aspas_ficticio" + std::to_string(number));
 		nodoFicticio->setPosition(0, 0, 0);
-		aspasNode = nodoFicticio->createChildSceneNode("aspas");
+		aspasNode = nodoFicticio->createChildSceneNode("aspas" + std::to_string(number));
 	}
 
 	arrayAspas = new Aspa*[numAspas];
 
 	for (int i = 0; i < numAspas; ++i) {
-		Ogre::SceneNode* aspaNode = aspasNode->createChildSceneNode("aspa_" + std::to_string(i));
-		Ogre::SceneNode* tableroNode = aspaNode->createChildSceneNode("tablero_" + std::to_string(i));
-		Ogre::SceneNode* cilindroNode = aspaNode->createChildSceneNode("adorno_" + std::to_string(i));
+		Ogre::SceneNode* aspaNode = aspasNode->createChildSceneNode("aspa_" + std::to_string(number) + std::to_string(i));
+		Ogre::SceneNode* tableroNode = aspaNode->createChildSceneNode("tablero_" + std::to_string(number) + std::to_string(i));
+		Ogre::SceneNode* cilindroNode = aspaNode->createChildSceneNode("adorno_" + std::to_string(number) + std::to_string(i));
 
 		arrayAspas[i] = new Aspa(aspaNode, tableroNode, cilindroNode);
 		
@@ -27,7 +27,7 @@ AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas) : numAspas(num
 		cilindroNode->roll(Ogre::Degree(360.0 / numAspas * i));
 	}
 
-	ejeNode = aspasNode->createChildSceneNode("ejeAspasMolino");
+	ejeNode = aspasNode->createChildSceneNode("ejeAspasMolino" + std::to_string(number));
 
 	Ogre::SceneManager* mSM = aspasNode->getCreator();
 
@@ -42,7 +42,7 @@ void AspasMolino::move()
 {
 	aspasNode->roll(Ogre::Degree(1.0));
 	for (int i = 0; i < numAspas; ++i) {
-		arrayAspas[i]->move();
+		arrayAspas[i]->move(-1.0);
 	}
 }
 
@@ -57,12 +57,18 @@ void AspasMolino::rotate()
 		aspasNode->setPosition(0, aspasNode->getPosition().y, 0);
 		aspasNode->yaw(Ogre::Degree(2), Ogre::Node::TS_PARENT);
 		rotationY += 2;
-		aspasNode->setPosition(250 * sin(rotationY * 2 * Ogre::Math::PI / 360), 
-							   aspasNode->getPosition().y, 
-							   250 * cos(rotationY * 2 * Ogre::Math::PI / 360 ));
+		aspasNode->translate(0, 0, 250, Ogre::Node::TS_LOCAL);
 	}
 	else { //Nodo ficticio
 		nodoFicticio->yaw(Ogre::Degree(2));
+	}
+}
+
+void AspasMolino::volar()
+{
+	aspasNode->roll(Ogre::Degree(-25));
+	for (int i = 0; i < numAspas; ++i) {
+		arrayAspas[i]->move(25);
 	}
 }
 

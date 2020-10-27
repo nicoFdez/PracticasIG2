@@ -25,9 +25,9 @@ Aspa::Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneN
 
 }
 
-void Aspa::move()
+void Aspa::move(int degrees)
 {
-	cilindroNode->roll(Ogre::Degree(-1.0));
+	cilindroNode->roll(Ogre::Degree(degrees));
 }
 
 //bool Aspa::keyPressed(const OgreBites::KeyboardEvent& evt)

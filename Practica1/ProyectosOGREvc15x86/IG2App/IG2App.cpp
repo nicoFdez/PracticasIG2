@@ -22,6 +22,24 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 			}
 		}
 		break;
+	case SDLK_h:
+		if (id == 3) {
+			segundosRotationNode->roll(Ogre::Degree(-2));
+		}
+		break;
+	case SDLK_j:
+		if (id == 4) {
+			//MoverTierra
+			tierraNode->setPosition(0, 0, 0);
+			tierraNode->yaw(Ogre::Degree(5));
+			tierraNode->translate(earthOrbitRadius, 0, 0, Node::TS_LOCAL);
+
+			//MoverLuna
+			lunaNode->setPosition(0, 0, 0);
+			lunaNode->yaw(Ogre::Degree(-20));
+			lunaNode->translate(moonOrbitRadius, 0, 0, Node::TS_LOCAL);
+		}
+		break;
 	default:
 		break;
 	}
@@ -40,6 +58,7 @@ void IG2App::shutdown()
   delete mCamMgr; mCamMgr = nullptr;
   delete aspasMolino; aspasMolino = nullptr;
   delete molino; molino = nullptr;
+  delete avion; avion = nullptr;
   
   // do not forget to call the base 
   IG2ApplicationContext::shutdown();
@@ -86,6 +105,80 @@ void IG2App::createObjects()
 	case 2: {
 		molino = new Molino(mSM->getRootSceneNode(), num);
 		addInputListener(molino);
+		break;
+	}
+    case 3: {
+		Ogre::Entity* ent;
+		Ogre::SceneNode* mClockNode = mSM->getRootSceneNode()->createChildSceneNode("Clock");
+		Ogre::SceneNode* mSpheresNode = mClockNode->createChildSceneNode("Spheres");
+		Ogre::SceneNode* mHourNode[12];
+		//Las bolitas
+		for (int i = 0; i < nHourIndicators; ++i) {
+			ent = mSM->createEntity("sphere.mesh");
+			Ogre::SceneNode* hijo = mSpheresNode->createChildSceneNode("Hora " + std::to_string(i + 1));
+			hijo->attachObject(ent);
+			hijo->setPosition(500 * Ogre::Math::Sin((Math::PI * i / 6)), 500 * Ogre::Math::Cos((Math::PI * i / 6)), 0);
+			mHourNode[i] = hijo;
+		}
+
+		//Bolita pequeña - bolita grande
+		for (int i = 1; i <= 12; i += 2) {
+			mSM->getSceneNode("Hora " + std::to_string(i))->setScale(0.5, 0.5, 0.5);
+		}
+
+		//Las agujitas
+		//Horas
+		Ogre::SceneNode* agujas = mClockNode->createChildSceneNode("Aguja horas");
+		ent = mSM->createEntity("cube.mesh");
+		agujas->attachObject(ent);
+		agujas->setPosition(100, 0, 0);
+		agujas->setScale(0.25, 3, 0.25);
+		agujas->roll(Ogre::Degree(-90.0));
+
+		//Minutos
+		agujas = mClockNode->createChildSceneNode("Aguja minutos");
+		ent = mSM->createEntity("cube.mesh");
+		agujas->attachObject(ent);
+		agujas->setPosition(0, 150, 0);
+		agujas->setScale(0.15, 4, 0.15);
+
+		//Segundos
+		segundosRotationNode = mClockNode->createChildSceneNode("SegunderoRotacion");
+		agujas = segundosRotationNode->createChildSceneNode("Aguja segundos");
+		ent = mSM->createEntity("cube.mesh");
+		agujas->attachObject(ent);
+		agujas->setScale(0.05, 4, 0.05);
+		agujas->setPosition(0, -160, 0);
+		segundosRotationNode->roll(Ogre::Degree(-45));
+		break;
+    }
+	case 4: {
+		Ogre::Entity* ent;
+
+		ent = mSM->createEntity("sphere.mesh");
+		tierraNode = mSM->getRootSceneNode()->createChildSceneNode("Tierra");
+		tierraNode->attachObject(ent);
+		tierraNode->setPosition(earthOrbitRadius, 0, 0);
+
+		ent = mSM->createEntity("sphere.mesh");
+		Ogre::SceneNode* solNode = mSM->getRootSceneNode()->createChildSceneNode("Sol");
+		solNode->attachObject(ent);
+		solNode->setScale(2, 2, 2);
+
+		ent = mSM->createEntity("sphere.mesh");
+		lunaNode = tierraNode->createChildSceneNode("Luna");
+		lunaNode->attachObject(ent);
+		lunaNode->setScale(0.35, 0.35, 0.35);
+		lunaNode->setPosition(moonOrbitRadius, 0, 0);
+
+		break;
+	}
+	case 5: {
+
+		Ogre::Entity* ent;
+		avion = new Avion(mSM->getRootSceneNode());
+		addInputListener(avion);
+
 		break;
 	}
 	default:

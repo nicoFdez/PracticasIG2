@@ -9,6 +9,7 @@
 
 #include "AspasMolino.h"
 #include "Molino.h"
+#include "Avion.h"
 
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener 
@@ -26,7 +27,7 @@ protected:
 
   virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);  // InputListener
       
-  int id = 2;
+  int id = 5;
   //Usados cuando id = 0
       Ogre::SceneNode* aspas = nullptr, 
           *aspaNode = nullptr, 
@@ -36,6 +37,16 @@ protected:
 
   AspasMolino* aspasMolino = nullptr;
   Molino* molino = nullptr;
+ 
+  Ogre::SceneNode* segundosRotationNode = nullptr;
+  unsigned int nHourIndicators = 12;
+
+  Ogre::SceneNode* tierraNode = nullptr;
+  Ogre::SceneNode* lunaNode = nullptr;
+  int earthOrbitRadius = 500;
+  int moonOrbitRadius = 163;
+
+  Avion* avion = nullptr;
 
   Ogre::SceneManager* mSM = nullptr;
   OgreBites::TrayManager* mTrayMgr = nullptr;    

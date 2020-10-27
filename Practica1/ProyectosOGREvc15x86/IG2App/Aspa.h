@@ -9,7 +9,7 @@ public:
 	~Aspa() {}
 	// Métodos de InputListener que pueden redefinirse
 	//virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
-	void move();
+	void move(int degrees);
 private:
 	Ogre::SceneNode
 		* aspaNode = nullptr,
