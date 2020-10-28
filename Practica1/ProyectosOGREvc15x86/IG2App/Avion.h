@@ -2,8 +2,9 @@
 #include <OgreInput.h>
 #include <OGRE\OgreSceneNode.h>
 #include "AspasMolino.h"
+#include "EntidadIG.h"
 
-class Avion : public OgreBites::InputListener
+class Avion : public EntidadIG
 {
 public:
 	Avion(Ogre::SceneNode* rootNode);
@@ -13,7 +14,6 @@ public:
 	}
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 protected:
-	Ogre::SceneNode* mNode = nullptr;
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
 	Ogre::SceneNode* alaDNode = nullptr;

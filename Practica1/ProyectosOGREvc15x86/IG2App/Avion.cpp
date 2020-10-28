@@ -3,11 +3,9 @@
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
 
-Avion::Avion(Ogre::SceneNode* rootNode)
+Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode("Avion"))
 {
-	mNode = rootNode->createChildSceneNode("Avion");
 	Ogre::Entity* ent;
-	Ogre::SceneManager* mSM = rootNode->getCreator();
 
 	//Crear cuerpo
 	ent = mSM->createEntity("sphere.mesh");
@@ -57,6 +55,8 @@ Avion::Avion(Ogre::SceneNode* rootNode)
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
+	sendEvent(this, evt);
+
 	if (evt.keysym.sym == SDLK_g)
 	{
 		heliceI->volar();

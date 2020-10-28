@@ -3,12 +3,10 @@
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
 
-Molino::Molino(Ogre::SceneNode* rootNode, int numAspas)
+Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->createChildSceneNode("molino"))
 {
-	mNode = rootNode->createChildSceneNode("molino");
 	mNode->setPosition(0, 0, -250);
 	Ogre::Entity* ent;
-	Ogre::SceneManager* mSM = rootNode->getCreator();
 
 	//Crear aspas
 	aspasMolino = new AspasMolino(mNode, numAspas);
@@ -32,17 +30,20 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas)
 
 bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
-	{
-		aspasMolino->move();
-	}
-	else if (evt.keysym.sym == SDLK_c) 
-	{
-		aspasMolino->moveAxis();
-	}
-	else if (evt.keysym.sym == SDLK_h)
-	{
-		aspasMolino->rotate();
-	}
+	sendEvent(this, evt);
+
+	
+	//if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
+	//{
+	//	aspasMolino->move();
+	//}
+	//else if (evt.keysym.sym == SDLK_c) 
+	//{
+	//	aspasMolino->moveAxis();
+	//}
+	//else if (evt.keysym.sym == SDLK_h)
+	//{
+	//	aspasMolino->rotate();
+	//}
 	return true;
 }
