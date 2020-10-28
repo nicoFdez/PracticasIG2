@@ -10,6 +10,9 @@ public:
 	//Constructora y destructora
 	EntidadIG(SceneNode* node);
 	EntidadIG() {}
+
+	virtual ~EntidadIG();
+
 	//Vector estático de listeners
 	static std::vector<EntidadIG*> appListeners;
 

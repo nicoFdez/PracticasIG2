@@ -10,7 +10,7 @@
 #include "AspasMolino.h"
 #include "Molino.h"
 #include "Avion.h"
-
+#include "Plano.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener
 {
@@ -55,7 +55,7 @@ protected:
 	Avion* avion = nullptr;
 
 	//Usados cuando id = 6
-	Ogre::SceneNode* mPlane = nullptr;
+	Plano* mPlane = nullptr;
 
 	Ogre::SceneManager* mSM = nullptr;
 	OgreBites::TrayManager* mTrayMgr = nullptr;

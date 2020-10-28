@@ -5,6 +5,8 @@
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
 
+#include "Plano.h"
+
 using namespace Ogre;
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -182,14 +184,17 @@ void IG2App::createObjects()
 		break;
 	}
 	case 6: {
-		MeshManager::getSingleton().createPlane("mPlane1080x800",
+		/*MeshManager::getSingleton().createPlane("mPlane1080x800",
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			Plane(Vector3::UNIT_Y, 0),
 			1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
 		Ogre::Entity* plane = mSM->createEntity("mPlane1080x800");
 		mPlane = mSM->getRootSceneNode()->createChildSceneNode("Plano");
-		mPlane->attachObject(plane);
+		mPlane->attachObject(plane);*/
+
+		mPlane = new Plano(mSM->getRootSceneNode());
+
 	}
 	default:
 		break;
