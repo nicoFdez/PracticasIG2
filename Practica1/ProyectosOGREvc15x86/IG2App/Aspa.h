@@ -1,14 +1,14 @@
 #pragma once
 #include <OgreInput.h>
 #include <OGRE\OgreSceneNode.h>
+#include "EntidadIG.h"
 
-class Aspa //: public OgreBites::InputListener
+class Aspa : public EntidadIG
 {
 public:
 	Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneNode* cilindroNode);
 	~Aspa() {}
-	// Métodos de InputListener que pueden redefinirse
-	//virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
 	void move(int degrees);
 private:
 	Ogre::SceneNode

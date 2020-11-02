@@ -96,12 +96,6 @@ void IG2App::createObjects()
 	}
 	case 1: {
 		aspasMolino = new AspasMolino(mSM->getRootSceneNode(), num);
-		//addInputListener(aspasMolino);
-
-		/*Aspa** arrayAspas = aspasMolino->getArrayAspas();
-		for (int i = 0; i < num; ++i) {
-			addInputListener(arrayAspas[i]);
-		}*/
 		break;
 	}
 	case 2: {
@@ -184,16 +178,22 @@ void IG2App::createObjects()
 		break;
 	}
 	case 6: {
-		/*MeshManager::getSingleton().createPlane("mPlane1080x800",
+
+		MeshManager::getSingleton().createPlane("mPlane1080x800",
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			Plane(Vector3::UNIT_Y, 0),
 			1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
-		Ogre::Entity* plane = mSM->createEntity("mPlane1080x800");
-		mPlane = mSM->getRootSceneNode()->createChildSceneNode("Plano");
-		mPlane->attachObject(plane);*/
-
 		mPlane = new Plano(mSM->getRootSceneNode());
+
+		mPlane1 = new Plano(mSM->getRootSceneNode(),1);
+		mPlane1->getmNode()->setPosition(-300, 1, 300);
+		mPlane1->getmNode()->setScale(0.5, 1, 0.5);
+		
+		mPlane2 = new Plano(mSM->getRootSceneNode(),2);
+		mPlane2->getmNode()->setPosition(300, 1, -300);
+		mPlane2->getmNode()->setScale(0.3, 1, 0.3);
+
 
 	}
 	default:
@@ -253,7 +253,7 @@ void IG2App::setupScene(void)
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
 	mLightNode->attachObject(luz);
 
-	mLightNode->setDirection(Ogre::Vector3(0, 0, -1));  //vec3.normalise();
+	mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
 	//lightNode->setPosition(0, 0, 1000);
 
 	//------------------------------------------------------------------------

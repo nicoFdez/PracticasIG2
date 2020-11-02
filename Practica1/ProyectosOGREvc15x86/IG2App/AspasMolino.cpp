@@ -2,10 +2,12 @@
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
+#include "Avion.h"
 
 AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas, int number) : EntidadIG(), numAspas(numAspas)
 {
 	Ogre::Entity* ent;
+	addListener(this);
 	if(modoGiro == 0)
 		mNode = rootNode->createChildSceneNode("aspas" + std::to_string(number));
 	else {
@@ -40,9 +42,9 @@ AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas, int number) : 
 void AspasMolino::move()
 {
 	mNode->roll(Ogre::Degree(1.0));
-	for (int i = 0; i < numAspas; ++i) {
-		arrayAspas[i]->move(-1.0);
-	}
+	//for (int i = 0; i < numAspas; ++i) {
+	//	arrayAspas[i]->move(-1.0);
+	//}
 }
 
 void AspasMolino::moveAxis()
@@ -63,24 +65,32 @@ void AspasMolino::rotate()
 	}
 }
 
-void AspasMolino::volar()
+void AspasMolino::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
 {
-	mNode->roll(Ogre::Degree(-25));
-	for (int i = 0; i < numAspas; ++i) {
-		arrayAspas[i]->move(25);
+	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
+	{
+		if (dynamic_cast<Avion*>(entidad) != nullptr) {
+			volar();
+		}
+		else {
+			move();
+		}
+		
+	}
+	else if (evt.keysym.sym == SDLK_c) 
+	{
+		moveAxis();
+	}
+	else if (evt.keysym.sym == SDLK_h)
+	{
+		rotate();
 	}
 }
 
-
-
-//bool AspasMolino::keyPressed(const OgreBites::KeyboardEvent& evt)
-//{
-//	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
-//	{
-//		mNode->roll(Ogre::Degree(1.0));
-//		for (int i = 0; i < numAspas; ++i) {
-//			arrayAspas[i]->move();
-//		}
-//	}
-//	return true;
-//}
+void AspasMolino::volar()
+{
+	mNode->roll(Ogre::Degree(-1));
+	/*for (int i = 0; i < numAspas; ++i) {
+		arrayAspas[i]->move(25);
+	}*/
+}

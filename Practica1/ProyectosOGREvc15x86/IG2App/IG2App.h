@@ -38,7 +38,7 @@ protected:
 	//Usados cuando id = 1
 	AspasMolino* aspasMolino = nullptr;
 
-	//Usados cuando id = 2
+	//Usados cuando id = 2 o 6
 	Molino* molino = nullptr;
 
 	//Usados cuando id = 3
@@ -51,11 +51,12 @@ protected:
 	int earthOrbitRadius = 500;
 	int moonOrbitRadius = 163;
 
-	//Usados cuando id = 5
+	//Usados cuando id = 5 o 6
 	Avion* avion = nullptr;
 
 	//Usados cuando id = 6
-	Plano* mPlane = nullptr;
+	Plano* mPlane = nullptr, *mPlane1 = nullptr, * mPlane2 = nullptr;
+
 
 	Ogre::SceneManager* mSM = nullptr;
 	OgreBites::TrayManager* mTrayMgr = nullptr;

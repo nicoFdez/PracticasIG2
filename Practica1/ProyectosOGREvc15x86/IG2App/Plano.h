@@ -4,6 +4,6 @@
 class Plano : public EntidadIG
 {
 public:
-	Plano(Ogre::SceneNode* rootNode);
+	Plano(Ogre::SceneNode* rootNode, int num = 0);
 };
 
