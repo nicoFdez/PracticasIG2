@@ -9,7 +9,6 @@ Aspa::Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneN
 	cilindroNode(cilindroNode)
 {
 	Ogre::Entity* ent;
-	addListener(this);
 
 	Ogre::SceneManager* mSM = aspaNode->getCreator();
 
@@ -24,14 +23,6 @@ Aspa::Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneN
 	cilindroNode->setPosition(400, 0, 10);
 
 
-}
-
-void Aspa::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
-{
-	if (evt.keysym.sym == SDLK_g) // #include <SDL_keycode.h>
-	{
-		move(-1);
-	}
 }
 
 void Aspa::move(int degrees)

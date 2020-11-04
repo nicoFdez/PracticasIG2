@@ -6,7 +6,6 @@
 Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode("Avion"))
 {
 	Ogre::Entity* ent;
-	addListener(this);
 
 	//Crear cuerpo
 	ent = mSM->createEntity("sphere.mesh");
@@ -56,12 +55,10 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	sendEvent(this, evt);
-
-	/*if (evt.keysym.sym == SDLK_g)
+	if (evt.keysym.sym == SDLK_g)
 	{
 		heliceI->volar();
 		heliceD->volar();
-	}*/
-	return false;
+	}
+	return true;
 }

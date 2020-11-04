@@ -7,7 +7,6 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 {
 	mNode->setPosition(0, 0, -250);
 	Ogre::Entity* ent;
-	addListener(this);
 
 	//Crear aspas
 	aspasMolino = new AspasMolino(mNode, numAspas);
@@ -31,6 +30,17 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 
 bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	sendEvent(this, evt);
+	if (evt.keysym.sym == SDLK_g)
+	{
+		aspasMolino->move();
+	}
+	else if (evt.keysym.sym == SDLK_c)
+	{
+		aspasMolino->moveAxis();
+	}
+	else if (evt.keysym.sym == SDLK_h)
+	{
+		aspasMolino->rotate();
+	}
 	return true;
 }

@@ -20,8 +20,6 @@ public:
 	void moveAxis();
 	void rotate();
 
-	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
-
 private:
 		int modoGiro = 0;
 		int rotationY = 0;

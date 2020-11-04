@@ -186,14 +186,36 @@ void IG2App::createObjects()
 
 		mPlane = new Plano(mSM->getRootSceneNode());
 
+		//Plano abajo a la izda
 		mPlane1 = new Plano(mSM->getRootSceneNode(),1);
-		mPlane1->getmNode()->setPosition(-300, 1, 300);
-		mPlane1->getmNode()->setScale(0.5, 1, 0.5);
+		mPlane1->getmNode()->setPosition(-351, 1, 260);
+		mPlane1->getmNode()->setScale(0.35, 1, 0.35);
 		
+		//Plano arriba a la dcha
 		mPlane2 = new Plano(mSM->getRootSceneNode(),2);
-		mPlane2->getmNode()->setPosition(300, 1, -300);
-		mPlane2->getmNode()->setScale(0.3, 1, 0.3);
+		mPlane2->getmNode()->setPosition(378, 1, -238);
+		mPlane2->getmNode()->setScale(0.3, 1, 0.405);
 
+		//Molino
+		molino = new Molino(mSM->getRootSceneNode(), 10);
+		molino->getmNode()->setPosition(378, 230, -238);
+		molino->getmNode()->setScale(0.3, 0.3, 0.3);
+		addInputListener(molino);
+
+		//Sinbad
+		Ogre::Entity* ent;
+		ent = mSM->createEntity("Sinbad.mesh");
+		sinbadNode = mSM->getRootSceneNode()->createChildSceneNode("Sinbad");
+		sinbadNode->attachObject(ent);
+		sinbadNode->setScale(12, 12, 12);
+		sinbadNode->setPosition(-351, 60, 260);
+
+		//Avion
+		avion = new Avion(mSM->getRootSceneNode());
+		avion->getmNode()->setPosition(378, 630, -238);
+		avion->getmNode()->setScale(0.2, 0.2, 0.2);
+		avion->getmNode()->yaw(Ogre::Degree(-45.0));
+		addInputListener(avion);
 
 	}
 	default:

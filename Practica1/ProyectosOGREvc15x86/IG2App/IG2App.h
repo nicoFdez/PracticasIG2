@@ -56,6 +56,7 @@ protected:
 
 	//Usados cuando id = 6
 	Plano* mPlane = nullptr, *mPlane1 = nullptr, * mPlane2 = nullptr;
+	Ogre::SceneNode* sinbadNode = nullptr;
 
 
 	Ogre::SceneManager* mSM = nullptr;
