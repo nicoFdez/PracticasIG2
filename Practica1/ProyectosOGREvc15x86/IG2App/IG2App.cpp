@@ -187,15 +187,15 @@ void IG2App::createObjects()
 		mPlane = new Plano(mSM->getRootSceneNode());
 
 		//Plano abajo a la izda
-		mPlane1 = new Plano(mSM->getRootSceneNode(),1);
+		mPlane1 = new Plano(mSM->getRootSceneNode(),"Practica1/rojo",1);
 		mPlane1->getmNode()->setPosition(-351, 1, 260);
 		mPlane1->getmNode()->setScale(0.35, 1, 0.35);
 		
 		//Plano arriba a la dcha
-		mPlane2 = new Plano(mSM->getRootSceneNode(),2);
+		mPlane2 = new Plano(mSM->getRootSceneNode(),"Practica1/marron",2);
 		mPlane2->getmNode()->setPosition(378, 1, -238);
 		mPlane2->getmNode()->setScale(0.3, 1, 0.405);
-
+		
 		//Molino
 		molino = new Molino(mSM->getRootSceneNode(), 10);
 		molino->getmNode()->setPosition(378, 230, -238);

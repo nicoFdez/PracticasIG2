@@ -4,6 +4,6 @@
 class Plano : public EntidadIG
 {
 public:
-	Plano(Ogre::SceneNode* rootNode, int num = 0);
+	Plano(Ogre::SceneNode* rootNode, std::string const& matName = "", int num = 0);
 };
 

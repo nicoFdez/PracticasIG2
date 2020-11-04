@@ -1,0 +1,21 @@
+material Practica1/rojo
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.0 0.0
+        }
+    }
+}
+
+material Practica1/marron
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.6 0.0
+        }
+    }
+}
