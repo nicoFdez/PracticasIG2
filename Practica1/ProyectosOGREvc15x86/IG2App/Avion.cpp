@@ -51,6 +51,15 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	pilotoNode->attachObject(ent);
 	pilotoNode->yaw(Ogre::Degree(-180));
 	pilotoNode->setPosition(0, 80, 0);
+
+	//Crear foco
+	Ogre::Light* foco = mSM->createLight("FocoAvion");
+	foco->setType(Ogre::Light::LT_SPOTLIGHT);
+	foco->setSpotlightInnerAngle(Ogre::Degree(5.0f));
+	foco->setSpotlightOuterAngle(Ogre::Degree(45.0f));
+
+	focoNode = mNode->createChildSceneNode("FocoAvionNode");
+	focoNode->attachObject(foco);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -61,4 +70,14 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 		heliceD->volar();
 	}
 	return true;
+}
+
+void Avion::frameRendered(const Ogre::FrameEvent& evt)
+{
+	heliceI->volar();
+	heliceD->volar();
+
+	mNode->translate( radius, 0, 0, Ogre::Node::TS_LOCAL);
+	mNode->yaw(Ogre::Degree(1));
+	mNode->translate(-radius, 0, 0, Ogre::Node::TS_LOCAL);
 }

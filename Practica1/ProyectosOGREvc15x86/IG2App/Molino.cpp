@@ -44,3 +44,8 @@ bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
 	}
 	return true;
 }
+
+void Molino::frameRendered(const Ogre::FrameEvent& evt)
+{
+	aspasMolino->move();
+}

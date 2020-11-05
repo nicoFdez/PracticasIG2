@@ -212,9 +212,8 @@ void IG2App::createObjects()
 
 		//Avion
 		avion = new Avion(mSM->getRootSceneNode());
-		avion->getmNode()->setPosition(378, 630, -238);
+		avion->getmNode()->setPosition(-avion->getRotateRadius(), 630, 0);
 		avion->getmNode()->setScale(0.2, 0.2, 0.2);
-		avion->getmNode()->yaw(Ogre::Degree(-45.0));
 		addInputListener(avion);
 
 	}
@@ -264,6 +263,8 @@ void IG2App::setupScene(void)
 	vp->setBackgroundColour(Ogre::ColourValue(0.7, 0.8, 0.9));
 
 	//------------------------------------------------------------------------
+
+	mSM->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 
 	// without light we would just get a black screen 
 

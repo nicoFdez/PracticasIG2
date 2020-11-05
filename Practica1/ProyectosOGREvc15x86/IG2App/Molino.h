@@ -9,7 +9,8 @@ class Molino: public EntidadIG
 public:
 	Molino(Ogre::SceneNode* rootNode, int numAspas);
 	~Molino() { delete aspasMolino; aspasMolino = nullptr; }
-	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt); 
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
 protected:
 
 	Ogre::SceneNode* techoNode = nullptr;

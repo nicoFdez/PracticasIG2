@@ -13,6 +13,10 @@ public:
 		delete heliceD; heliceD = nullptr;
 	}
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+	virtual void frameRendered(const Ogre::FrameEvent& evt);
+
+	int getRotateRadius(){ return radius; }
+
 protected:
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
@@ -21,5 +25,9 @@ protected:
 	Ogre::SceneNode* pilotoNode = nullptr;
 	AspasMolino* heliceI = nullptr;
 	AspasMolino* heliceD = nullptr;
+
+	int radius = 450;
+
+	Ogre::SceneNode* focoNode;
 };
 
