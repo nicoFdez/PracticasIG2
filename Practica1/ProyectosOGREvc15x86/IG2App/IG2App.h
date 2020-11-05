@@ -11,6 +11,7 @@
 #include "Molino.h"
 #include "Avion.h"
 #include "Plano.h"
+#include "Simbad.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener
 {
@@ -58,6 +59,7 @@ protected:
 	Plano* mPlane = nullptr, *mPlane1 = nullptr, * mPlane2 = nullptr;
 	Ogre::SceneNode* sinbadNode = nullptr;
 
+	Simbad* simbad = nullptr;
 
 	Ogre::SceneManager* mSM = nullptr;
 	OgreBites::TrayManager* mTrayMgr = nullptr;

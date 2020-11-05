@@ -61,6 +61,7 @@ void IG2App::shutdown()
 	delete aspasMolino; aspasMolino = nullptr;
 	delete molino; molino = nullptr;
 	delete avion; avion = nullptr;
+	delete simbad; simbad = nullptr;
 
 	// do not forget to call the base 
 	IG2ApplicationContext::shutdown();
@@ -184,7 +185,7 @@ void IG2App::createObjects()
 			Plane(Vector3::UNIT_Y, 0),
 			1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
-		mPlane = new Plano(mSM->getRootSceneNode());
+		mPlane = new Plano(mSM->getRootSceneNode(), "Practica1/agua");
 
 		//Plano abajo a la izda
 		mPlane1 = new Plano(mSM->getRootSceneNode(),"Practica1/rojo",1);
@@ -203,12 +204,9 @@ void IG2App::createObjects()
 		addInputListener(molino);
 
 		//Sinbad
-		Ogre::Entity* ent;
-		ent = mSM->createEntity("Sinbad.mesh");
-		sinbadNode = mSM->getRootSceneNode()->createChildSceneNode("Sinbad");
-		sinbadNode->attachObject(ent);
-		sinbadNode->setScale(12, 12, 12);
-		sinbadNode->setPosition(-351, 60, 260);
+		simbad = new Simbad(mSM->getRootSceneNode());
+		simbad->getmNode()->setScale(12, 12, 12);
+		simbad->getmNode()->setPosition(-351, 60, 260);
 
 		//Avion
 		avion = new Avion(mSM->getRootSceneNode());
@@ -270,7 +268,7 @@ void IG2App::setupScene(void)
 
 	Light* luz = mSM->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(0.75, 0.75, 0.75);
+	luz->setDiffuseColour(0.85, 0.85, 0.85);
 
 	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");

@@ -15,6 +15,7 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 	//Cerar el techo
 	techoNode = mNode->createChildSceneNode("techo");
 	ent = mSM->createEntity("sphere.mesh");
+	ent->setMaterialName("Practica1/amarillo");
 	techoNode->attachObject(ent);
 	techoNode->setPosition(0, 200, 0);
 	techoNode->scale(2.2, 2.2, 2.2);
@@ -22,6 +23,7 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 	//Crear el cuerpo
 	cuerpoNode = mNode->createChildSceneNode("cuerpo");
 	ent = mSM->createEntity("Barrel.mesh");
+	ent->setMaterialName("Practica1/piedra");
 	cuerpoNode->attachObject(ent);
 	cuerpoNode->scale(90, 160, 90);
 	cuerpoNode->setPosition(0, -280, 0);

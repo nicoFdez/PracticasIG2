@@ -32,6 +32,7 @@ AspasMolino::AspasMolino(Ogre::SceneNode* rootNode, int numAspas, int number) : 
 	ejeNode = mNode->createChildSceneNode("ejeAspasMolino" + std::to_string(number));
 
 	ent = mSM->createEntity("Barrel.mesh");
+	ent->setMaterialName("Practica1/hierro");
 	ejeNode->attachObject(ent);
 	ejeNode->pitch(Ogre::Degree(90.0));
 	ejeNode->scale(20, 10, 20);

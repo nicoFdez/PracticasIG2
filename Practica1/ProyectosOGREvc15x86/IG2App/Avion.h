@@ -1,6 +1,4 @@
 #pragma once
-#include <OgreInput.h>
-#include <OGRE\OgreSceneNode.h>
 #include "AspasMolino.h"
 #include "EntidadIG.h"
 
