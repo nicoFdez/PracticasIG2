@@ -1,6 +1,7 @@
 #pragma once
 #include <OgreInput.h>
 #include <OGRE\OgreSceneNode.h>
+#include <OgreEntity.h>
 #include "AspasMolino.h"
 #include "EntidadIG.h"
 
@@ -13,8 +14,13 @@ public:
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 protected:
 
+	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+
+	bool moving = true;
 	Ogre::SceneNode* techoNode = nullptr;
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	AspasMolino* aspasMolino = nullptr;
+
+	Ogre::Entity* techo;
 };
 

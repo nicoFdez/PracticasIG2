@@ -71,10 +71,12 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_g)
-	{
+	if (evt.keysym.sym == SDLK_g){
 		heliceI->volar();
 		heliceD->volar();
+	}
+	else if (evt.keysym.sym == SDLK_r){
+		sendEvent(this, evt);
 	}
 	return true;
 }
@@ -83,8 +85,20 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt)
 {
 	heliceI->volar();
 	heliceD->volar();
-
-	mNode->translate( radius, 0, 0, Ogre::Node::TS_LOCAL);
-	mNode->yaw(Ogre::Degree(1));
-	mNode->translate(-radius, 0, 0, Ogre::Node::TS_LOCAL);
+	if (moving) {
+		mNode->translate( radius, 0, 0, Ogre::Node::TS_LOCAL);
+		mNode->yaw(Ogre::Degree(1));
+		mNode->translate(-radius, 0, 0, Ogre::Node::TS_LOCAL);
+	}
 }
+
+void Avion::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+{
+	if (evt.keysym.sym == SDLK_r) {
+		heliceI->hideOrnaments();
+		heliceI->hideOrnaments();
+		focoNode->getAttachedObject("FocoAvion")->setVisible(false);
+		moving = false;
+	}
+}
+

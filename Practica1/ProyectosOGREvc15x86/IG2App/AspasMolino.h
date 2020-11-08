@@ -19,6 +19,7 @@ public:
 	void volar();
 	void moveAxis();
 	void rotate();
+	void hideOrnaments();
 
 private:
 		int modoGiro = 0;

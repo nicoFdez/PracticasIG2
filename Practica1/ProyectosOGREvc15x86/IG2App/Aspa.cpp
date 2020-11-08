@@ -25,12 +25,15 @@ Aspa::Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneN
 	cilindroNode->setPosition(400, 0, 10);
 
 	ent->setMaterialName("Practica1/azulMar");
-
-
 }
 
 void Aspa::move(int degrees)
 {
 	cilindroNode->roll(Ogre::Degree(degrees));
+}
+
+void Aspa::hideOrnament()
+{
+	cilindroNode->setVisible(false);
 }
 

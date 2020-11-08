@@ -65,6 +65,13 @@ void AspasMolino::rotate()
 	}
 }
 
+void AspasMolino::hideOrnaments()
+{
+	for (int i = 0; i < numAspas; ++i) {
+		arrayAspas[i]->hideOrnament();
+	}
+}
+
 void AspasMolino::volar()
 {
 	mNode->roll(Ogre::Degree(-25));

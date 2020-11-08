@@ -186,7 +186,7 @@ void IG2App::createObjects()
 			1080, 800, 100, 80, true, 1, 1.0, 1.0, Vector3::UNIT_Z);
 
 		mPlane = new Plano(mSM->getRootSceneNode(), "Practica1/agua");
-
+		EntidadIG::addListener(mPlane);
 		//Plano abajo a la izda
 		mPlane1 = new Plano(mSM->getRootSceneNode(),"Practica1/rojo",1);
 		mPlane1->getmNode()->setPosition(-351, 1, 260);
@@ -202,6 +202,7 @@ void IG2App::createObjects()
 		molino->getmNode()->setPosition(378, 230, -238);
 		molino->getmNode()->setScale(0.3, 0.3, 0.3);
 		addInputListener(molino);
+		EntidadIG::addListener(molino);
 
 		//Sinbad
 		simbad = new Simbad(mSM->getRootSceneNode());
@@ -213,7 +214,16 @@ void IG2App::createObjects()
 		avion->getmNode()->setPosition(-avion->getRotateRadius(), 630, 0);
 		avion->getmNode()->setScale(0.2, 0.2, 0.2);
 		addInputListener(avion);
+		EntidadIG::addListener(avion);
 
+		//Cabeza
+		Ogre::Entity* ent;
+		ent = mSM->createEntity("sphere.mesh");
+		ent->setMaterialName("Practica1/cabezaAmarilla");
+		Ogre::SceneNode* cabezaNode = mSM->getRootSceneNode()->createChildSceneNode("cabezaAmarilla");
+		cabezaNode->attachObject(ent);
+		cabezaNode->setPosition(440, 40, -130);
+		cabezaNode->setScale(.4, .4, .4);
 	}
 	default:
 		break;

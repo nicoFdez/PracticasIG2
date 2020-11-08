@@ -1,6 +1,5 @@
 #include "Molino.h"
 #include <OgreSceneManager.h>
-#include <OgreEntity.h>
 #include <SDL_keycode.h>
 
 Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->createChildSceneNode("molino"))
@@ -14,9 +13,9 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 
 	//Cerar el techo
 	techoNode = mNode->createChildSceneNode("techo");
-	ent = mSM->createEntity("sphere.mesh");
-	ent->setMaterialName("Practica1/amarillo");
-	techoNode->attachObject(ent);
+	techo = mSM->createEntity("sphere.mesh");
+	techo->setMaterialName("Practica1/amarillo");
+	techoNode->attachObject(techo);
 	techoNode->setPosition(0, 200, 0);
 	techoNode->scale(2.2, 2.2, 2.2);
 	
@@ -27,7 +26,6 @@ Molino::Molino(Ogre::SceneNode* rootNode, int numAspas) : EntidadIG(rootNode->cr
 	cuerpoNode->attachObject(ent);
 	cuerpoNode->scale(90, 160, 90);
 	cuerpoNode->setPosition(0, -280, 0);
-
 }
 
 bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -49,5 +47,15 @@ bool Molino::keyPressed(const OgreBites::KeyboardEvent& evt)
 
 void Molino::frameRendered(const Ogre::FrameEvent& evt)
 {
-	aspasMolino->move();
+	if(moving)
+		aspasMolino->move();
+}
+
+void Molino::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+{
+	if (evt.keysym.sym == SDLK_r) {
+		aspasMolino->hideOrnaments();
+		techo->setMaterialName("Practica1/rojo");
+		moving = false;
+	}
 }

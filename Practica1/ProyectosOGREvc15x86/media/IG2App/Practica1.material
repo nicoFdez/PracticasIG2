@@ -68,6 +68,24 @@ material Practica1/agua
     }
 }
 
+
+material Practica1/rioSeco
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.27 0.27 0.27 
+            texture_unit 
+            {
+                texture BeachStones.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+
 material Practica1/checker
 {
     technique
@@ -108,6 +126,22 @@ material Practica1/hierro
             {
                 texture BumpyMetal.jpg
                 colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/cabezaAmarilla
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture spotlight_image.png
+                env_map spherical
+                
             }
         }
     }

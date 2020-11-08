@@ -15,7 +15,11 @@ public:
 
 	int getRotateRadius(){ return radius; }
 
+
 protected:
+
+	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;
 	Ogre::SceneNode* alaDNode = nullptr;
@@ -25,6 +29,7 @@ protected:
 	AspasMolino* heliceD = nullptr;
 
 	int radius = 450;
+	bool moving = true;
 
 	Ogre::SceneNode* focoNode;
 };

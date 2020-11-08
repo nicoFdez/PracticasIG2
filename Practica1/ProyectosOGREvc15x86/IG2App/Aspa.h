@@ -9,6 +9,7 @@ public:
 	Aspa(Ogre::SceneNode* aspaNode, Ogre::SceneNode* tableroNode, Ogre::SceneNode* cilindroNode);
 	~Aspa() {}
 	void move(int degrees);
+	void hideOrnament();
 private:
 	Ogre::SceneNode
 		* aspaNode = nullptr,
