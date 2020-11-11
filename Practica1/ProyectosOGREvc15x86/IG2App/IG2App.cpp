@@ -62,6 +62,7 @@ void IG2App::shutdown()
 	delete molino; molino = nullptr;
 	delete avion; avion = nullptr;
 	delete simbad; simbad = nullptr;
+	delete boya; boya = nullptr;
 
 	// do not forget to call the base 
 	IG2ApplicationContext::shutdown();
@@ -208,6 +209,7 @@ void IG2App::createObjects()
 		simbad = new Simbad(mSM->getRootSceneNode());
 		simbad->getmNode()->setScale(12, 12, 12);
 		simbad->getmNode()->setPosition(-351, 60, 260);
+		addInputListener(simbad);
 
 		//Avion
 		avion = new Avion(mSM->getRootSceneNode());
@@ -224,6 +226,12 @@ void IG2App::createObjects()
 		cabezaNode->attachObject(ent);
 		cabezaNode->setPosition(440, 40, -130);
 		cabezaNode->setScale(.4, .4, .4);
+
+		//Boya
+		boya = new Boya(mSM->getRootSceneNode());
+		boya->getmNode()->setScale(20, 15, 20);
+		boya->getmNode()->setPosition(0, 40, 0);
+
 	}
 	default:
 		break;
