@@ -1,7 +1,6 @@
 #pragma once
 #include "EntidadIG.h"
 
-
 class Simbad : public EntidadIG
 {
 public:
@@ -14,6 +13,7 @@ private:
 	AnimationState* animationDance;
 	AnimationState* animationRunBase;
 	AnimationState* animationRunTop;
+	AnimationState* animationMove;
 
 	Ogre::Entity* sword;
 	bool leftHanded;

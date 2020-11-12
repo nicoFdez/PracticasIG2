@@ -209,6 +209,7 @@ void IG2App::createObjects()
 		simbad = new Simbad(mSM->getRootSceneNode());
 		simbad->getmNode()->setScale(12, 12, 12);
 		simbad->getmNode()->setPosition(-351, 60, 260);
+		simbad->getmNode()->setInitialState();
 		addInputListener(simbad);
 
 		//Avion
@@ -228,10 +229,11 @@ void IG2App::createObjects()
 		cabezaNode->setScale(.4, .4, .4);
 
 		//Boya
-		boya = new Boya(mSM->getRootSceneNode());
-		boya->getmNode()->setScale(20, 15, 20);
-		boya->getmNode()->setPosition(0, 40, 0);
-
+		//boya = new Boya(mSM->getRootSceneNode());
+		//boya->getmNode()->setScale(20, 15, 20);
+		//boya->getmNode()->setPosition(0, 0, 0);
+		//boya->getmNode()->setInitialState();
+		//addInputListener(boya);
 	}
 	default:
 		break;
