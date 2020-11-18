@@ -1,0 +1,148 @@
+material Practica1/rojo 
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.0 0.0
+        }
+    }
+}
+
+material Practica1/marron
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.0 0.6 0.0
+        }
+    }
+}
+
+material Practica1/marronOscuro
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.29 0.19 0.03
+        }
+    }
+}
+
+material Practica1/azulMar
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.11 0.53 0.66
+        }
+    }
+}
+
+material Practica1/amarillo
+{
+    technique
+    {
+        pass
+        {
+            diffuse 1.00 0.98 0.00
+        }
+    }
+}
+
+material Practica1/agua
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture Water02.jpg
+                scroll_anim -0.1 0.0
+            }
+        }
+    }
+}
+
+
+material Practica1/rioSeco
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.27 0.27 0.27 
+            texture_unit 
+            {
+                texture BeachStones.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+
+material Practica1/checker
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture checker.png
+            }
+        }
+    }
+}
+
+material Practica1/piedra
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture floor_diffuse.PNG
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/hierro
+{
+    technique
+    {
+        pass
+        {
+            diffuse 0.12 0.12 0.13
+            texture_unit 
+            {
+                texture BumpyMetal.jpg
+                colour_op modulate
+            }
+        }
+    }
+}
+
+material Practica1/cabezaAmarilla
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture spotlight_image.png
+                env_map spherical
+                
+            }
+        }
+    }
+}
