@@ -2,6 +2,8 @@
 #include <OgreSceneManager.h>
 #include <OgreEntity.h>
 #include <SDL_keycode.h>
+#include <OgreBillboardSet.h>
+#include <OgreParticleSystem.h>
 
 Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode("Avion"))
 {
@@ -67,6 +69,22 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 
 	focoNode = mNode->createChildSceneNode("FocoAvionNode");
 	focoNode->attachObject(foco);
+
+	//BillBoardSet :)
+	BillboardSet* bbSet = mSM->createBillboardSet("avion_cartel", 1);
+	bbSet->setDefaultDimensions(200, 120);
+	bbSet->setMaterialName("Practica2/Panel");
+	Billboard* bb = bbSet->createBillboard(Vector3(0, 0, -100));
+
+	colaNode = mNode->createChildSceneNode("Cola");
+	colaNode->setPosition(0, 0, -250);
+	colaNode->attachObject(bbSet);
+
+	pSys = mSM->createParticleSystem("psPumPum", "Practica2/Explosion");
+	pSys->setEmitting(false);
+	psNode = mNode->createChildSceneNode("psAvion");
+	psNode->attachObject(pSys);
+	psNode->setVisible(false);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -95,10 +113,20 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt)
 void Avion::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
 {
 	if (evt.keysym.sym == SDLK_r) {
-		heliceI->hideOrnaments();
-		heliceI->hideOrnaments();
+
+		cuerpoNode->setVisible(false);
+		alaINode->setVisible(false);
+		heliceI->getmNode()->setVisible(false);
+		alaDNode->setVisible(false);
+		heliceD->getmNode()->setVisible(false);
+		frenteNode->setVisible(false);
+		pilotoNode->setVisible(false);
+		colaNode->setVisible(false);
 		focoNode->getAttachedObject("FocoAvion")->setVisible(false);
 		moving = false;
+
+		psNode->setVisible(true);
+		pSys->setEmitting(true);
 	}
 }
 

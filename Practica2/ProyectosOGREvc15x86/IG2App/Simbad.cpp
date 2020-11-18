@@ -23,6 +23,10 @@ Simbad::Simbad(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildScene
 	animationRunTop->setEnabled(true);
 	animationRunTop->setLoop(true);
 
+	animationIdle = ent->getAnimationState("IdleTop");
+	animationIdle->setEnabled(false);
+	animationIdle->setLoop(true);
+
 	sword = mSM->createEntity("Sword.mesh");
 	ent->attachObjectToBone("Handle.R", sword);
 	leftHanded = false;
@@ -68,16 +72,17 @@ Simbad::Simbad(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildScene
 void Simbad::frameRendered(const Ogre::FrameEvent& evt)
 {
 	if (animationDance->getEnabled()) animationDance->addTime(evt.timeSinceLastFrame);
-	else {
+	else if(!animationIdle->getEnabled()) {
 		animationRunBase->addTime(evt.timeSinceLastFrame);
 		animationRunTop->addTime(evt.timeSinceLastFrame);
 		animationMove->addTime(evt.timeSinceLastFrame);
 	}
+	else animationIdle->addTime(evt.timeSinceLastFrame);
 }
 
 bool Simbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 {
-	if (evt.keysym.sym == SDLK_c) {
+	if (evt.keysym.sym == SDLK_c && !animationIdle->getEnabled()) {
 		if (animationDance->getEnabled()) {
 			animationDance->setEnabled(false);
 			animationDance->setTimePosition(0);
@@ -112,4 +117,24 @@ bool Simbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 		}
 	}
 	return false;
+}
+
+void Simbad::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+{
+	if (evt.keysym.sym == SDLK_r) {
+		mNode->translate(0, -50, 0);
+		mNode->pitch(Ogre::Degree(-90));
+
+		animationDance->setEnabled(false);
+		animationDance->setTimePosition(0);
+
+		animationRunBase->setEnabled(false);
+		animationDance->setTimePosition(0);
+		animationRunTop->setEnabled(false);
+		animationDance->setTimePosition(0);
+
+		animationMove->setEnabled(false);
+
+		animationIdle->setEnabled(true);
+	}
 }

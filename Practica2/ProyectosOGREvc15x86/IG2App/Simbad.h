@@ -7,6 +7,8 @@ public:
 	Simbad(Ogre::SceneNode* rootNode);
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
+protected:
+	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
 private:
 	Ogre::Entity* ent;
 
@@ -14,6 +16,7 @@ private:
 	AnimationState* animationRunBase;
 	AnimationState* animationRunTop;
 	AnimationState* animationMove;
+	AnimationState* animationIdle;
 
 	Ogre::Entity* sword;
 	bool leftHanded;

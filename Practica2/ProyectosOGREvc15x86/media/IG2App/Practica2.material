@@ -146,3 +146,38 @@ material Practica1/cabezaAmarilla
         }
     }
 }
+
+material Practica2/Panel
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            texture_unit
+            {
+                texture 10points.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}
+
+material Practica2/Smoke
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            scene_blend alpha_blend
+            depth_write off
+            diffuse vertexcolour
+            texture_unit
+            {
+                texture smoke.png
+                tex_address_mode clamp
+            }
+        }
+    }
+}

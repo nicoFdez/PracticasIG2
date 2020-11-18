@@ -25,6 +25,8 @@ protected:
 	Ogre::SceneNode* alaDNode = nullptr;
 	Ogre::SceneNode* frenteNode = nullptr;
 	Ogre::SceneNode* pilotoNode = nullptr;
+	Ogre::SceneNode* colaNode = nullptr;
+	Ogre::SceneNode* psNode = nullptr;
 	AspasMolino* heliceI = nullptr;
 	AspasMolino* heliceD = nullptr;
 
@@ -32,5 +34,7 @@ protected:
 	bool moving = true;
 
 	Ogre::SceneNode* focoNode;
+
+	ParticleSystem* pSys = nullptr;
 };
 

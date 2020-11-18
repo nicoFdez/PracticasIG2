@@ -211,6 +211,7 @@ void IG2App::createObjects()
 		simbad->getmNode()->setPosition(-351, 60, 260);
 		simbad->getmNode()->setInitialState();
 		addInputListener(simbad);
+		EntidadIG::addListener(simbad);
 
 		//Avion
 		avion = new Avion(mSM->getRootSceneNode());
