@@ -36,5 +36,6 @@ protected:
 	Ogre::SceneNode* focoNode;
 
 	ParticleSystem* pSys = nullptr;
+	ParticleSystem* smokeTrail = nullptr;
 };
 

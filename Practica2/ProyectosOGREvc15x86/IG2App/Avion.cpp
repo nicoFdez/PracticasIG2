@@ -80,11 +80,16 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	colaNode->setPosition(0, 0, -250);
 	colaNode->attachObject(bbSet);
 
+	//Explosion
 	pSys = mSM->createParticleSystem("psPumPum", "Practica2/Explosion");
 	pSys->setEmitting(false);
 	psNode = mNode->createChildSceneNode("psAvion");
 	psNode->attachObject(pSys);
-	psNode->setVisible(false);
+
+	//estela
+	smokeTrail = mSM->createParticleSystem("psTrail", "Practica2/SmokeTrail");
+	smokeTrail->setEmitting(true);
+	psNode->attachObject(smokeTrail);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -125,8 +130,8 @@ void Avion::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt
 		focoNode->getAttachedObject("FocoAvion")->setVisible(false);
 		moving = false;
 
-		psNode->setVisible(true);
 		pSys->setEmitting(true);
+		smokeTrail->setEmitting(false);
 	}
 }
 
