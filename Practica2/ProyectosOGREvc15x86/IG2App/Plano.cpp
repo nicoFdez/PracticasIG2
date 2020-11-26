@@ -2,6 +2,7 @@
 #include <OgreSceneManager.h>
 #include <OgreMeshManager.h>
 #include <SDL_keycode.h>
+#include <OgreCamera.h>
 
 Plano::Plano(Ogre::SceneNode* rootNode, std::string const& matName, int num) : EntidadIG(rootNode->createChildSceneNode("Plano" + std::to_string(num)))
 {

@@ -181,3 +181,51 @@ material Practica2/Smoke
         }
     }
 }
+
+material Practica2/space
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            ambient 0.5 0.5 0.5 
+            diffuse 1.0 1.0 1.0 
+            texture_unit 
+            {
+                texture spaceSky.jpg
+                colour_op modulate 
+                rotate_anim 0.01
+            }    
+            texture_unit 
+            {
+                texture lightMap.jpg
+                colour_op modulate 
+            }
+        }
+    }
+}
+
+
+material Practica2/reflejo
+{
+    technique
+    {
+        //agua
+        pass 
+        {
+            specular 0.5 0.5 0.5 0.5 0.5
+            texture_unit 
+            {
+                texture Water02.jpg
+                scroll_anim -0.1 0.0
+            }
+
+            texture_unit 
+            {
+                texture BeachStones.jpg
+                colour_op modulate
+            }
+        }
+    }
+}

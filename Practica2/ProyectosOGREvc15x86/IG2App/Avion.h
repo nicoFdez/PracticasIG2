@@ -33,8 +33,6 @@ protected:
 	int radius = 450;
 	bool moving = true;
 
-	Ogre::SceneNode* focoNode;
-
 	ParticleSystem* pSys = nullptr;
 	ParticleSystem* smokeTrail = nullptr;
 };

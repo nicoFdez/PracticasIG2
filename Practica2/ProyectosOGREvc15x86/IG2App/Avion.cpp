@@ -59,17 +59,6 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	pilotoNode->yaw(Ogre::Degree(-180));
 	pilotoNode->setPosition(0, 80, 0);
 
-	//Crear foco
-	Ogre::Light* foco = mSM->createLight("FocoAvion");
-	foco->setType(Ogre::Light::LT_SPOTLIGHT);
-	foco->setDiffuseColour(0.75, 0.75, 0.75);
-	foco->setDirection(Ogre::Vector3(0, -1, 0.25));  //vec3.normalise();
-	foco->setSpotlightInnerAngle(Ogre::Degree(5.0f));
-	foco->setSpotlightOuterAngle(Ogre::Degree(45.0f));
-
-	focoNode = mNode->createChildSceneNode("FocoAvionNode");
-	focoNode->attachObject(foco);
-
 	//BillBoardSet :)
 	BillboardSet* bbSet = mSM->createBillboardSet("avion_cartel", 1);
 	bbSet->setDefaultDimensions(200, 120);
@@ -127,7 +116,6 @@ void Avion::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt
 		frenteNode->setVisible(false);
 		pilotoNode->setVisible(false);
 		colaNode->setVisible(false);
-		focoNode->getAttachedObject("FocoAvion")->setVisible(false);
 		moving = false;
 
 		pSys->setEmitting(true);

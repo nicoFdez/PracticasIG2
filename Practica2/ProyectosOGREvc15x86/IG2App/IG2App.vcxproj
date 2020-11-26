@@ -128,6 +128,7 @@
     <ClInclude Include="IG2App.h" />
     <ClInclude Include="Molino.h" />
     <ClInclude Include="Plano.h" />
+    <ClInclude Include="Rio.h" />
     <ClInclude Include="Simbad.h" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClCompile Include="IG2App.cpp" />
     <ClCompile Include="Molino.cpp" />
     <ClCompile Include="Plano.cpp" />
+    <ClCompile Include="Rio.cpp" />
     <ClCompile Include="Simbad.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
