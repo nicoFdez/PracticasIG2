@@ -18,7 +18,7 @@ public:
 
 protected:
 
-	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+	virtual void receiveEvent(EntidadIG* entidad, msgType evt);
 
 	Ogre::SceneNode* cuerpoNode = nullptr;
 	Ogre::SceneNode* alaINode = nullptr;

@@ -119,22 +119,24 @@ bool Simbad::keyPressed(const OgreBites::KeyboardEvent& evt)
 	return false;
 }
 
-void Simbad::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+void Simbad::receiveEvent(EntidadIG* entidad, msgType evt)
 {
-	if (evt.keysym.sym == SDLK_r) {
-		mNode->translate(0, -50, 0);
-		mNode->pitch(Ogre::Degree(-90));
+	if (evt == msgType::r_pressed) {
+		if (!animationIdle->getEnabled()) {
+			mNode->translate(0, -50, 0);
+			mNode->pitch(Ogre::Degree(-90));
 
-		animationDance->setEnabled(false);
-		animationDance->setTimePosition(0);
+			animationDance->setEnabled(false);
+			animationDance->setTimePosition(0);
 
-		animationRunBase->setEnabled(false);
-		animationDance->setTimePosition(0);
-		animationRunTop->setEnabled(false);
-		animationDance->setTimePosition(0);
+			animationRunBase->setEnabled(false);
+			animationDance->setTimePosition(0);
+			animationRunTop->setEnabled(false);
+			animationDance->setTimePosition(0);
 
-		animationMove->setEnabled(false);
+			animationMove->setEnabled(false);
 
-		animationIdle->setEnabled(true);
+			animationIdle->setEnabled(true);
+		}
 	}
 }

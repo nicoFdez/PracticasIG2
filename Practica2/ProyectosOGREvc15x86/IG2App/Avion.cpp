@@ -88,7 +88,7 @@ bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
 		heliceD->volar();
 	}
 	else if (evt.keysym.sym == SDLK_r){
-		sendEvent(this, evt);
+		sendEvent(this, msgType::r_pressed);
 	}
 	return true;
 }
@@ -104,9 +104,9 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt)
 	}
 }
 
-void Avion::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+void Avion::receiveEvent(EntidadIG* entidad, msgType evt)
 {
-	if (evt.keysym.sym == SDLK_r) {
+	if (evt == msgType::r_pressed) {
 
 		cuerpoNode->setVisible(false);
 		alaINode->setVisible(false);

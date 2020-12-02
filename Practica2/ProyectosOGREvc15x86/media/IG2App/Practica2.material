@@ -147,6 +147,22 @@ material Practica1/cabezaAmarilla
     }
 }
 
+material Practica2/cabezaAmarillaInvertida
+{
+    technique
+    {
+        pass
+        {
+            texture_unit 
+            {
+                texture spotlight_image_inverse.png
+                env_map spherical
+                
+            }
+        }
+    }
+}
+
 material Practica2/Panel
 {
     technique

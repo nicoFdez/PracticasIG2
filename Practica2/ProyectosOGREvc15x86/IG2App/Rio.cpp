@@ -19,7 +19,9 @@ Rio::Rio(Ogre::SceneNode* rootNode, int n) : Plano(rootNode, "Practica2/reflejo"
 
 void Rio::setReflejo(Camera* cam, Viewport* windowViewport)
 {
-	Camera* camRef = mSM->createCamera("RefCam");
+	mainCam = cam;
+	windowViewport->addListener(this);
+	camRef = mSM->createCamera("RefCam");
 
 	camRef->setNearClipDistance(cam->getNearClipDistance());
 	camRef->setFarClipDistance(cam->getFarClipDistance());
@@ -38,10 +40,11 @@ void Rio::setReflejo(Camera* cam, Viewport* windowViewport)
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 		TEX_TYPE_2D,
 		(Real)windowViewport->getActualWidth(), // widht ejemplo
-		(Real)cam->getViewport()->getActualHeight(), // height ejemplo
+		(Real)windowViewport->getActualHeight(), // height ejemplo
 		0, PF_R8G8B8, TU_RENDERTARGET);
 
 	RenderTexture* renderTexture = rttRef->getBuffer()->getRenderTarget();
+	renderTexture->addListener(this);
 	Viewport* vpt = renderTexture->addViewport(camRef); // ocupando toda
 	vpt->setClearEveryFrame(true); // la textura
 	vpt->setBackgroundColour(ColourValue::White); // black/white
@@ -53,4 +56,21 @@ void Rio::setReflejo(Camera* cam, Viewport* windowViewport)
 				// LBO_ADD / LBO_ALPHA_BLEND / LBO_REPLACE
 
 	tu->setProjectiveTexturing(true, camRef);
+}
+
+void Rio::viewportDimensionsChanged(Viewport* viewport)
+{	
+	camRef->setNearClipDistance(mainCam->getNearClipDistance());
+	camRef->setFarClipDistance(mainCam->getFarClipDistance());
+	camRef->setAspectRatio(mainCam->getAspectRatio());
+}
+
+void Rio::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
+{
+	sendEvent(this, msgType::pre_render_reflejo);
+}
+
+void Rio::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
+{
+	sendEvent(this, msgType::post_render_reflejo);
 }

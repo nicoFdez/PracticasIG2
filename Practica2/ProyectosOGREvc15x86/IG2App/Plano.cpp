@@ -11,9 +11,9 @@ Plano::Plano(Ogre::SceneNode* rootNode, std::string const& matName, int num) : E
 	mNode->attachObject(plane);
 }
 
-void Plano::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+void Plano::receiveEvent(EntidadIG* entidad, msgType evt)
 {
-	if (evt.keysym.sym == SDLK_r) {
+	if (evt == msgType::r_pressed) {
 		plane->setMaterialName("Practica1/rioSeco");
 	}
 }

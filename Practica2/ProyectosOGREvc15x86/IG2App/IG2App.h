@@ -14,6 +14,7 @@
 #include "Simbad.h"
 #include "Boya.h"
 #include "Rio.h"
+#include "Cabeza.h"
 
 class IG2App : public  OgreBites::IG2ApplicationContext, OgreBites::InputListener
 {
@@ -39,6 +40,7 @@ protected:
 	Ogre::SceneNode* cabezaNode = nullptr;
 	Simbad* simbad = nullptr;
 	Boya* boya = nullptr;
+	Cabeza* cabeza = nullptr;
 
 	Ogre::SceneManager* mSM = nullptr;
 	OgreBites::TrayManager* mTrayMgr = nullptr;

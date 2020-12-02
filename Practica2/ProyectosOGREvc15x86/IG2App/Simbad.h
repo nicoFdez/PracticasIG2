@@ -8,7 +8,7 @@ public:
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 	virtual bool keyPressed(const OgreBites::KeyboardEvent& evt);
 protected:
-	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+	virtual void receiveEvent(EntidadIG* entidad, msgType evt);
 private:
 	Ogre::Entity* ent;
 

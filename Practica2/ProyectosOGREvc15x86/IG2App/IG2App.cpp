@@ -5,9 +5,6 @@
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
 
-#include "Plano.h"
-#include "Rio.h"
-
 using namespace Ogre;
 
 bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -39,6 +36,7 @@ void IG2App::shutdown()
 	delete boya; boya = nullptr;
 	delete mRio; mRio = nullptr;
 	delete mPlane2; mPlane2 = nullptr;
+	delete cabeza; cabeza = nullptr;
 
 	// do not forget to call the base 
 	IG2ApplicationContext::shutdown();
@@ -57,7 +55,6 @@ void IG2App::createObjects()
 
 		mRio = new Rio(mSM->getRootSceneNode(), 0);
 		mRio->setReflejo((Camera*)mCamNode->getAttachedObject(0), getRenderWindow()->getViewport(0));
-
 		EntidadIG::addListener(mRio);
 		
 		//Plano arriba a la dcha
@@ -87,15 +84,6 @@ void IG2App::createObjects()
 		addInputListener(avion);
 		EntidadIG::addListener(avion);
 
-		//Cabeza
-		Ogre::Entity* ent;
-		ent = mSM->createEntity("sphere.mesh");
-		ent->setMaterialName("Practica1/cabezaAmarilla");
-		Ogre::SceneNode* cabezaNode = mSM->getRootSceneNode()->createChildSceneNode("cabezaAmarilla");
-		cabezaNode->attachObject(ent);
-		cabezaNode->setPosition(440, 40, -130);
-		cabezaNode->setScale(.4, .4, .4);
-
 		//Boya
 		boya = new Boya(mSM->getRootSceneNode());
 		boya->getmNode()->setScale(20, 15, 20);
@@ -103,6 +91,13 @@ void IG2App::createObjects()
 		boya->getmNode()->setInitialState();
 		addInputListener(boya);
 
+		//Cabeza
+		cabeza = new Cabeza(mSM->getRootSceneNode());
+		cabeza->getmNode()->setPosition(440, 40, -130);
+		cabeza->getmNode()->setScale(.4, .4, .4);
+		EntidadIG::addListener(cabeza);
+
+		//Skyplane
 		mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
 			"Practica2/space", 1, 1, true, 1.0, 10, 10);
 

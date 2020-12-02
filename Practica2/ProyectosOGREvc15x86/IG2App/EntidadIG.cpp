@@ -11,7 +11,7 @@ EntidadIG::~EntidadIG() {
 
 }
 
-void EntidadIG::sendEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt) {
+void EntidadIG::sendEvent(EntidadIG* entidad, msgType evt) {
 	for (EntidadIG* e : appListeners)
 		e->receiveEvent(this, evt);
 }

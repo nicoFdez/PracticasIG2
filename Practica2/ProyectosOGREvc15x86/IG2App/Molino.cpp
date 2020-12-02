@@ -51,9 +51,9 @@ void Molino::frameRendered(const Ogre::FrameEvent& evt)
 		aspasMolino->move();
 }
 
-void Molino::receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt)
+void Molino::receiveEvent(EntidadIG* entidad, msgType evt)
 {
-	if (evt.keysym.sym == SDLK_r) {
+	if (evt == msgType::r_pressed) {
 		aspasMolino->hideOrnaments();
 		techo->setMaterialName("Practica1/rojo");
 		moving = false;

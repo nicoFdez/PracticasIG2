@@ -21,12 +21,17 @@ public:
 
 	Ogre::SceneNode* getmNode() { return mNode; }
 protected:
+
+	enum msgType {
+		r_pressed, pre_render_reflejo, post_render_reflejo
+	};
+
 	Ogre::SceneNode* mNode;
 	Ogre::SceneManager* mSM;
 
-	void sendEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+	void sendEvent(EntidadIG* entidad, msgType evt);
 
-	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt) {};
+	virtual void receiveEvent(EntidadIG* entidad, msgType evt) {};
 
 	virtual void frameRendered(const Ogre::FrameEvent& evt) {};
 
@@ -34,4 +39,3 @@ protected:
 		return false;
 	};
 };
-

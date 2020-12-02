@@ -14,7 +14,7 @@ public:
 	virtual void frameRendered(const Ogre::FrameEvent& evt);
 protected:
 
-	virtual void receiveEvent(EntidadIG* entidad, const OgreBites::KeyboardEvent& evt);
+	virtual void receiveEvent(EntidadIG* entidad, msgType evt);
 
 	bool moving = true;
 	Ogre::SceneNode* techoNode = nullptr;
