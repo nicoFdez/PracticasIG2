@@ -99,7 +99,7 @@ void IG2App::createObjects()
 
 		//Skyplane
 		mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
-			"Practica2/space", 1, 1, true, 1.0, 10, 10);
+			"Practica2/spaceGSLS", 1, 1, true, 1.0, 10, 10);
 
 		/*
 			mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -200),

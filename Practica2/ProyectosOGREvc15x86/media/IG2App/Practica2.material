@@ -245,3 +245,54 @@ material Practica2/reflejo
         }
     }
 }
+
+vertex_program SpaceVS glsl 
+{
+    source SpaceVS.glsl 
+    default_params 
+    {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+        param_named_auto SinTiempo sintime_0_2pi 32   
+    }
+}
+
+fragment_program SpaceFS glsl
+{
+    source SpaceFS.glsl 
+    default_params 
+    {
+        param_named texturaL int 0
+        param_named texturaM int 1
+        param_named BF float 0.5
+        param_named intLuzAmb float 1.0
+    }
+}
+
+material Practica2/spaceGSLS
+{
+    technique
+    {
+        pass
+        {
+            lighting off
+            ambient 0.5 0.5 0.5 
+            diffuse 1.0 1.0 1.0 
+            vertex_program_ref SpaceVS
+            { 
+            }
+            fragment_program_ref SpaceFS
+            { 
+            }
+            texture_unit 
+            {
+                texture lightMap.jpg
+                colour_op modulate 
+            }
+            texture_unit 
+            {
+                texture spaceSky.jpg
+                colour_op modulate 
+            } 
+        }
+    }
+}
