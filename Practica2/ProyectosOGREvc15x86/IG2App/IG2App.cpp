@@ -86,7 +86,6 @@ void IG2App::createObjects()
 
 		//Boya
 		boya = new Boya(mSM->getRootSceneNode());
-		boya->getmNode()->setScale(20, 15, 20);
 		boya->getmNode()->setPosition(0, 0, 0);
 		boya->getmNode()->setInitialState();
 		addInputListener(boya);

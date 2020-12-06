@@ -9,8 +9,8 @@
 
 Boya::Boya(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode("Boya"))
 {
-	Ogre::Entity* ent = mSM->createEntity("Barrel.mesh");
-	ent->setMaterialName("Practica1/checker");
+	Ogre::Entity* ent = mSM->createEntity("uv_sphere.mesh");
+	ent->setMaterialName("Practica2/EsferaAgujerosGLSL");
 	mNode->attachObject(ent);
 
 	//Hacer la animacion

@@ -296,3 +296,46 @@ material Practica2/spaceGSLS
         }
     }
 }
+
+vertex_program EsferaAgujerosVS glsl 
+{
+    source EsferaAgujerosVS.glsl 
+    default_params 
+    {
+        param_named_auto modelViewProjMat worldviewproj_matrix 
+    }
+}
+
+fragment_program EsferaAgujerosFS glsl
+{
+    source EsferaAgujerosFS.glsl 
+    default_params 
+    {
+        param_named texturaCorrosion int 0
+        param_named intLuzAmb float 1.0
+        param_named InColor float4 1.0 0.8 0.0 1.0
+        param_named OutColor float4 0.2 1.0 0.2 1.0
+    }
+}
+
+material Practica2/EsferaAgujerosGLSL
+{
+    technique
+    {
+        pass
+        {
+            cull_hardware none
+            cull_software none
+            vertex_program_ref EsferaAgujerosVS
+            { 
+            }
+            fragment_program_ref EsferaAgujerosFS
+            { 
+            }
+            texture_unit 
+            {
+                texture corrosion.jpg
+            } 
+        }
+    }
+}
