@@ -1,12 +1,12 @@
 #version 330 core
 in vec2 vUv0; // out del vertex shader
-in vec2 vUv1;
 in vec3 vVertex;
 in vec3 vNormal;
 
+uniform float Flipping;
+
 uniform sampler2D texturaCorrosion; // tipo sampler2D para texturas 2D
 uniform sampler2D texturaBumpy;
-uniform float intLuzAmb; // luz ambiente blanca
 uniform vec4 InColor;
 uniform vec4 OutColor;
 
@@ -39,7 +39,8 @@ void main() {
 
         // diffuse en view space
         vec3 diffuse;
-        if (gl_FrontFacing){
+        bool frontFacing = (Flipping > -1)? gl_FrontFacing : !gl_FrontFacing;
+        if (frontFacing){
             diffuse = diff(vVertex, vNormal) * lightDiffuse * materialDiffuse;
             color = vec4((ambient + diffuse), 1.0) * OutColor; // + specular
 

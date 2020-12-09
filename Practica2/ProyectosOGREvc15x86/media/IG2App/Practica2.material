@@ -263,8 +263,6 @@ fragment_program SpaceFS glsl
     {
         param_named texturaL int 0
         param_named texturaM int 1
-        param_named BF float 0.5
-        param_named intLuzAmb float 1.0
     }
 }
 
@@ -313,9 +311,10 @@ fragment_program EsferaAgujerosFS glsl
     source EsferaAgujerosFS.glsl 
     default_params 
     {
+        param_named_auto Flipping render_target_flipping
+        
         param_named texturaCorrosion int 0
         param_named texturaBumpy int 1
-        param_named intLuzAmb float 1.0
         param_named InColor float4 1.0 0.8 0.0 1.0
         param_named OutColor float4 0.2 1.0 0.2 1.0
 
