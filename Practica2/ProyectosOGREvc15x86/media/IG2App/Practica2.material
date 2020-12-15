@@ -350,3 +350,62 @@ material Practica2/EsferaAgujerosGLSL
         }
     }
 }
+
+vertex_program RenderQuadVS glsl
+{
+    source DefaultVS.glsl
+    default_params {
+        param_named_auto modelViewProjMat worldviewproj_matrix
+    }
+}
+fragment_program LuminancePS glsl
+{
+    source LuminancePS.glsl
+    default_params {
+        param_named RTT0 int 0
+    }
+}
+
+material Practica2/LuminancePS {
+    technique {
+        pass {
+            depth_check off
+            depth_write off
+            vertex_program_ref RenderQuadVS {
+            }
+            fragment_program_ref LuminancePS {
+            }
+            texture_unit RTT0
+            {
+                filtering none
+            }
+        }
+    } 
+}
+
+fragment_program Kernel3x3PS glsl
+{
+    source Kernel3x3PS.glsl
+    default_params {
+        param_named RTT0 int 0
+        param_named kernel float9 0 0 0 0 1 0 0 0 0  
+    }
+}
+
+material Practica2/EdgeEmbossPS {
+    technique {
+        pass {
+            depth_check off
+            depth_write off
+            vertex_program_ref RenderQuadVS {
+            }
+            fragment_program_ref Kernel3x3PS {
+                param_named kernel float9 -4./17 -2./17 0./17 -2./17 1./17 2./17 0./17 2./17 4./17
+            }
+            texture_unit RTT0
+            {
+                filtering none
+            }
+        }
+    } 
+}

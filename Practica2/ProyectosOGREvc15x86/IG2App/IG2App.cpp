@@ -4,6 +4,7 @@
 #include <OgreInput.h>
 #include <SDL_keycode.h>
 #include <OgreMeshManager.h>
+#include <OgreCompositorManager.h>
 
 using namespace Ogre;
 
@@ -13,6 +14,16 @@ bool IG2App::keyPressed(const OgreBites::KeyboardEvent& evt)
 	{
 	case SDLK_ESCAPE:
 		getRoot()->queueEndRendering();
+		break;
+	case SDLK_l:
+		luminance = !luminance;
+		CompositorManager::getSingleton().setCompositorEnabled(getRenderWindow()->getViewport(0),
+			"Practica2/Luminance", luminance);
+		break;
+	case SDLK_k:
+		edgeEmboss = !edgeEmboss;
+		CompositorManager::getSingleton().setCompositorEnabled(getRenderWindow()->getViewport(0),
+			"Practica2/EdgeEmboss", edgeEmboss);
 		break;
 	default:
 		break;
@@ -151,6 +162,18 @@ void IG2App::setupScene(void)
 	// and tell it to render into the main window
 	Viewport* vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(.0, .0, .0));
+
+	//Luminance
+	CompositorManager::getSingleton().addCompositor(vp,
+		"Practica2/Luminance");
+	CompositorManager::getSingleton().setCompositorEnabled(vp,
+		"Practica2/Luminance", luminance);
+
+	//EdgeEmboss
+	CompositorManager::getSingleton().addCompositor(vp,
+		"Practica2/EdgeEmboss");
+	CompositorManager::getSingleton().setCompositorEnabled(vp,
+		"Practica2/EdgeEmboss", edgeEmboss);
 
 	//------------------------------------------------------------------------
 
