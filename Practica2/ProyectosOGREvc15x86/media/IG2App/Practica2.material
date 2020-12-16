@@ -405,6 +405,7 @@ material Practica2/EdgeEmbossPS {
             texture_unit RTT0
             {
                 filtering none
+                tex_address_mode clamp
             }
         }
     } 
