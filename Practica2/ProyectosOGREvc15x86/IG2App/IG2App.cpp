@@ -100,6 +100,7 @@ void IG2App::createObjects()
 		boya->getmNode()->setPosition(0, 0, 0);
 		boya->getmNode()->setInitialState();
 		addInputListener(boya);
+		EntidadIG::addListener(boya);
 
 		//Cabeza
 		cabeza = new Cabeza(mSM->getRootSceneNode());

@@ -55,7 +55,7 @@ void Molino::receiveEvent(EntidadIG* entidad, msgType evt)
 {
 	if (evt == msgType::r_pressed) {
 		aspasMolino->hideOrnaments();
-		techo->setMaterialName("Practica1/rojo");
+		techo->setMaterialName("Practica2/NormalesGLSL");
 		moving = false;
 	}
 }

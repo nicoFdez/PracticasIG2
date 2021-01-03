@@ -410,3 +410,116 @@ material Practica2/EdgeEmbossPS {
         }
     } 
 }
+
+
+vertex_program ExplotaVS glsl 
+{
+    source ExplotaVS.glsl 
+    default_params {
+
+    }
+}
+
+geometry_program ExplotaGS glsl 
+{
+    source ExplotaGS.glsl 
+    input_operation_type triangles 
+    output_operation_type triangle_strip 
+    max_output_vertices 3 
+
+    default_params { // para las uniform del shader
+        param_named_auto modelViewProjMat worldviewproj_matrix
+        param_named_auto Tiempo time
+    }
+}
+
+fragment_program ExplotaFS glsl
+{
+    source ExplotaFS.glsl 
+    default_params 
+    {
+        param_named_auto Flipping render_target_flipping
+        
+        param_named texturaInside int 0
+        param_named texturaOutside int 1
+    }
+}
+
+material Practica2/ExplotaGLSL
+{
+    technique
+    {
+        pass
+        {
+            cull_hardware none
+            cull_software none
+            vertex_program_ref ExplotaVS
+            { 
+            }
+            geometry_program_ref ExplotaGS
+            {  
+            }
+            fragment_program_ref ExplotaFS
+            { 
+            }
+            texture_unit 
+            {
+                texture corrosion.jpg
+            } 
+            texture_unit 
+            {
+                texture BumpyMetal.jpg
+            } 
+        }
+    }
+}
+
+vertex_program NormalesVS glsl 
+{
+    source NormalesVS.glsl 
+    default_params {
+
+    }
+}
+
+geometry_program NormalesGS glsl 
+{
+    source NormalesGS.glsl 
+    input_operation_type triangles 
+    output_operation_type line_strip 
+    max_output_vertices 6 
+
+    default_params { // para las uniform del shader
+        param_named_auto modelViewProjMat worldviewproj_matrix
+    }
+}
+
+fragment_program NormalesFS glsl
+{
+    source NormalesFS.glsl 
+    default_params 
+    {
+
+    }
+}
+
+material Practica2/NormalesGLSL
+{
+    technique
+    {
+        pass
+        {
+            cull_hardware none
+            cull_software none
+            vertex_program_ref NormalesVS
+            { 
+            }
+            geometry_program_ref NormalesGS
+            {  
+            }
+            fragment_program_ref NormalesFS
+            { 
+            }
+        }
+    }
+}

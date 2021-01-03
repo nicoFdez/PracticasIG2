@@ -9,7 +9,7 @@
 
 Boya::Boya(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode("Boya"))
 {
-	Ogre::Entity* ent = mSM->createEntity("uv_sphere.mesh");
+	ent = mSM->createEntity("uv_sphere.mesh");
 	ent->setMaterialName("Practica2/EsferaAgujerosGLSL");
 	mNode->attachObject(ent);
 
@@ -56,4 +56,11 @@ Boya::Boya(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode
 void Boya::frameRendered(const Ogre::FrameEvent& evt)
 {
 	animationState->addTime(evt.timeSinceLastFrame);
+}
+
+void Boya::receiveEvent(EntidadIG* entidad, msgType evt)
+{
+	if (evt == msgType::r_pressed) {
+		ent->setMaterialName("Practica2/ExplotaGLSL");
+	}
 }
