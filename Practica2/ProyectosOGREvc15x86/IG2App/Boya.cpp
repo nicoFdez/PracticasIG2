@@ -61,6 +61,6 @@ void Boya::frameRendered(const Ogre::FrameEvent& evt)
 void Boya::receiveEvent(EntidadIG* entidad, msgType evt)
 {
 	if (evt == msgType::r_pressed) {
-		ent->setMaterialName("Practica2/ExplotaGLSL");
+		ent->setMaterialName("Practica2/Explota2GLSL");
 	}
 }
