@@ -50,7 +50,7 @@ Boya::Boya(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNode
 
 	animationState = mSM->createAnimationState("animVV");
 	animationState->setLoop(true);
-	animationState->setEnabled(true);
+	animationState->setEnabled(false);
 }
 
 void Boya::frameRendered(const Ogre::FrameEvent& evt)

@@ -16,20 +16,22 @@ vec3 barycenter(vec3 vertex[3]) {
     return normalize((vertex[0] + vertex[1] + vertex[2])/3);
 }
 
+vec3 rotate(vec3 posDes, float angle){
+    return posDes * mat3(cos(angle), 0, sin(angle), 0,1,0,-sin(angle),0, cos(angle));
+}
+
 void main() {
     vec3 vertices[3] = vec3[]( gl_in[0].gl_Position.xyz, gl_in[1].gl_Position.xyz, gl_in[2].gl_Position.xyz );
     vec3 dir = barycenter(vertices); // para los 3 vértices
 
-    // -> vec3 dir = normalVec(vertices); // para los 3 vértices
     for (int i=0; i<3; ++i) { // para emitir 3 vértices
+        vec3 dirScale = vertices[i] - dir;
         vec3 posDes = vertices[i] + dir * VD;
+        posDes += normalize(dirScale) * 2;
+        posDes = rotate(posDes, Tiempo2PI);
         // vértice desplazado (los 3 en la misma dirección)
         gl_Position = modelViewProjMat * vec4(posDes,1.0);
-        //yaw(Tiempo2PI);
-        // paso a Clip-Space
-
         vUvF = vUv0[i] * 2;
-
         EmitVertex(); // al no declarar ninguna variable out, los vertices del
         // triángulo emitido no llevan asociados atributos, solo las coordenadas
     }
