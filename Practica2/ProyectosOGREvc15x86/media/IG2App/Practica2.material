@@ -400,7 +400,7 @@ material Practica2/EdgeEmbossPS {
             vertex_program_ref RenderQuadVS {
             }
             fragment_program_ref Kernel3x3PS {
-                param_named kernel float9 -4./17 -2./17 0./17 -2./17 1./17 2./17 0./17 2./17 4./17
+                param_named kernel float9 -4 -2 0 -2 1 2 0 2 4
             }
             texture_unit RTT0
             {
@@ -416,7 +416,8 @@ vertex_program ExplotaVS glsl
 {
     source ExplotaVS.glsl 
     default_params {
-
+        param_named_auto modelViewMat worldview_matrix
+        param_named_auto normalMat inverse_transpose_worldview_matrix 
     }
 }
 
@@ -442,6 +443,10 @@ fragment_program ExplotaFS glsl
         
         param_named texturaInside int 0
         param_named texturaOutside int 1
+
+        param_named_auto lightAmbient ambient_light_colour 0 
+        param_named_auto lightDiffuse light_diffuse_colour 0 
+        param_named_auto lightPosition light_position_view_space 0
     }
 }
 
@@ -484,6 +489,7 @@ geometry_program Explota2GS glsl
     default_params { // para las uniform del shader
         param_named_auto modelViewProjMat worldviewproj_matrix
         param_named_auto Tiempo2PI  time_0_2pi 32
+        param_named_auto Tiempo time
     }
 }
 

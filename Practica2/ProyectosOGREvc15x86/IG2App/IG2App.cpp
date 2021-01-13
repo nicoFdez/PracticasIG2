@@ -184,7 +184,7 @@ void IG2App::setupScene(void)
 
 	Light* luz = mSM->createLight("Luz");
 	luz->setType(Ogre::Light::LT_DIRECTIONAL);
-	luz->setDiffuseColour(1.0, 1.0, 1.0);
+	luz->setDiffuseColour(0.8, 0.8, 0.8);
 
 	mLightNode = mSM->getRootSceneNode()->createChildSceneNode("nLuz");
 	//mLightNode = mCamNode->createChildSceneNode("nLuz");
@@ -192,6 +192,8 @@ void IG2App::setupScene(void)
 
 	mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
 	//lightNode->setPosition(0, 0, 1000);
+
+	mSM->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	//------------------------------------------------------------------------
 

@@ -13,6 +13,8 @@ uniform vec4 OutColor;
 uniform vec3 lightAmbient; // intensidades de la luz
 uniform vec3 lightDiffuse;
 uniform vec4 lightPosition; // datos de la fuente de luz en view space
+
+
 uniform vec3 materialDiffuse; // datos del material ¡Front=Back!
 
 out vec4 fFragColor; // out del fragment shader

@@ -10,7 +10,12 @@ uniform float Tiempo;
 const float VD = 50; // longitud del desplazamiento
 
 in vec2[] vUv0;
+in vec3[] vVertex;
+in vec3[] vNormal;
+
 out vec2 vUvF;
+out vec3 vVertexF;
+out vec3 vNormalF;
 
 vec3 normalVec(vec3 vertex[3]) { 
     return normalize(cross(vertex[1] - vertex[0], vertex[2] - vertex[1]));
@@ -28,6 +33,8 @@ void main() {
         // paso a Clip-Space
 
         vUvF = vUv0[i] * 2;
+        vVertexF = vVertex[i];
+        vNormalF = vNormal[i];
 
         EmitVertex(); // al no declarar ninguna variable out, los vertices del
         // triángulo emitido no llevan asociados atributos, solo las coordenadas
