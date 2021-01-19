@@ -6,7 +6,9 @@ out vec4 fFragColor;
 const vec3 WsRGB = vec3(0.2125, 0.7154, 0.0721);
 
 void main() {
+    //Color de la textura(escena)
     vec4 sceneColor = texture(RTT0, vUv0);
+    //Paso a blanco y negro del color
     float lum = dot(vec3(sceneColor), WsRGB);
     fFragColor = vec4(lum, lum, lum, sceneColor.a);
 }

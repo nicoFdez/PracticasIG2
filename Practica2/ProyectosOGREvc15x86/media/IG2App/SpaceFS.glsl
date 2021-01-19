@@ -7,8 +7,8 @@ out vec4 fFragColor; // out del fragment shader
 
 void main() {
     vec3 colorL = vec3(texture(texturaL, vUv0)); // acceso a téxel
-    vec3 colorM = vec3(texture(texturaM, vUv1)); // configuración!
+    vec3 colorM = vec3(texture(texturaM, vUv1)); // acceso a téxel
+    //Multiplicacion de texturas
     vec3 color = colorL * colorM;
-    // mix ‐> (1‐BF).colorL + BF.colorM
     fFragColor = vec4(color, 1.0); // out
 }

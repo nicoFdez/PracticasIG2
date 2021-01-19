@@ -32,8 +32,9 @@ float diff(vec3 cVertex, vec3 cNormal)
 void main() {
     vec3 colorCorrosion = vec3(texture(texturaCorrosion, vUv0)); // acceso a téxel
     vec4 color;
+    //USamos la textura de corrosion para formar los agujeros de la esfera
     if(colorCorrosion.r > 0.6){
-        discard;
+        discard; //Ese texel corresponde a un agujero
     }
     else{
         // ambient
@@ -41,16 +42,22 @@ void main() {
 
         // diffuse en view space
         vec3 diffuse;
+        //Para evitar problemas con otros motores 
+        //indica si la cara que se ve es exterior o interior
         bool frontFacing = (Flipping > -1)? gl_FrontFacing : !gl_FrontFacing;
+        //si es exterior
         if (frontFacing){
             diffuse = diff(vVertex, vNormal) * lightDiffuse * materialDiffuse;
-            color = vec4((ambient + diffuse), 1.0) * OutColor; // + specular
 
+            //Mezcla del color parametrizado con la textura
+            color = vec4((ambient + diffuse), 1.0) * OutColor; // + specular
             vec4 colorBumpy = vec4(vec3(texture(texturaBumpy, vUv0)), 1.0); 
             color = color * colorBumpy;
         } 
+        //si es interior
         else {
             diffuse = diff(vVertex, -vNormal) * lightDiffuse * materialDiffuse;
+            //Color interior
             color = vec4((ambient + diffuse), 1.0) * InColor; // + specular
         }
     }
