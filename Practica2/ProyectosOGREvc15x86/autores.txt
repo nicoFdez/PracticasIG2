@@ -1,2 +1,6 @@
 Nicolás Fernández Descalzo
 Javier Cruz López de Ochoa
+
+Hemos hecho todas las partes opcionales:
+-Arreglar el reflejo de la cara
+-Arreglar el reflejo
