@@ -10,12 +10,12 @@ uniform mat4 modelViewProjMat; // pendiente de realizar
 
 // ‐> // variable out vColor ‐> cada vértice se emite con su color
 void generateLine(int index) { // normal al vértice index (0, 1, 2)
-    vColor = vec3(1.0, 0, 0); // ¿color válido? ‐> …
+    vColor = vec3(1.0, 0, 0); 
     gl_Position = modelViewProjMat * gl_in[index].gl_Position;
     EmitVertex(); // 1º vértice de la línea con color y …
 
-    vColor = vec3(1.0, 1.0, 0); // ¿color válido? ‐> …
-    gl_Position = modelViewProjMat * (gl_in[index].gl_Position + vec4(gNormal[index], 0) * SIZE);
+    vColor = vec3(1.0, 1.0, 0); 
+    gl_Position = modelViewProjMat * (gl_in[index].gl_Position + vec4(gNormal[index], 0) * SIZE); //Desplazada SIZE en dir normal
     EmitVertex(); // 2º vértice de la línea con color y …
 
     EndPrimitive(); // línea formada por los 2 vértices emitidos
