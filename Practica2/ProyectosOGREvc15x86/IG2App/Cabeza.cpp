@@ -12,6 +12,7 @@ Cabeza::Cabeza(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildScene
 
 void Cabeza::receiveEvent(EntidadIG* entidad, msgType evt)
 {
+	//Eventos mandados por el rio cuando refleja, para que la imagen se arregle en el reflejo
 	if (evt == msgType::pre_render_reflejo) {
 		ent->setMaterialName("Practica2/cabezaAmarillaInvertida");
 	}

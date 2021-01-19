@@ -17,20 +17,20 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	cuerpoNode->setScale(2,2,2);
 
 	//Cerar alas
-	//AlaIzda
-	ent = mSM->createEntity("cube.mesh");
-	ent->setMaterialName("Practica1/checker");
-	alaINode = mNode->createChildSceneNode("AlaI");
-	alaINode->attachObject(ent);
-	alaINode->setPosition(-425, 0, 0);
-	alaINode->scale(5, 0.2, 1);
-	//AlaDcha
-	ent = mSM->createEntity("cube.mesh");
-	ent->setMaterialName("Practica1/checker");
-	alaDNode = mNode->createChildSceneNode("AlaD");
-	alaDNode->attachObject(ent);
-	alaDNode->setPosition(425, 0, 0);
-	alaDNode->scale(5, 0.2, 1);
+		//AlaIzda
+		ent = mSM->createEntity("cube.mesh");
+		ent->setMaterialName("Practica1/checker");
+		alaINode = mNode->createChildSceneNode("AlaI");
+		alaINode->attachObject(ent);
+		alaINode->setPosition(-425, 0, 0);
+		alaINode->scale(5, 0.2, 1);
+		//AlaDcha
+		ent = mSM->createEntity("cube.mesh");
+		ent->setMaterialName("Practica1/checker");
+		alaDNode = mNode->createChildSceneNode("AlaD");
+		alaDNode->attachObject(ent);
+		alaDNode->setPosition(425, 0, 0);
+		alaDNode->scale(5, 0.2, 1);
 
 	//Crear frente
 	ent = mSM->createEntity("Barrel.mesh");
@@ -42,14 +42,14 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	frenteNode->setPosition(0, 0, 185);
 
 	//Crear Helices
-	//HeliceIzda
-	heliceI = new AspasMolino(mNode, 5, 2);
-	heliceI->getmNode()->setPosition(-400, 0, 55);
-	heliceI->getmNode()->setScale(0.35, 0.35, 0.35);
-	//HeliceDcha
-	heliceD = new AspasMolino(mNode, 5, 3);
-	heliceD->getmNode()->setPosition(400, 0, 55);
-	heliceD->getmNode()->setScale(0.35, 0.35, 0.35);
+		//HeliceIzda
+		heliceI = new AspasMolino(mNode, 5, 2);
+		heliceI->getmNode()->setPosition(-400, 0, 55);
+		heliceI->getmNode()->setScale(0.35, 0.35, 0.35);
+		//HeliceDcha
+		heliceD = new AspasMolino(mNode, 5, 3);
+		heliceD->getmNode()->setPosition(400, 0, 55);
+		heliceD->getmNode()->setScale(0.35, 0.35, 0.35);
 
 	//Crear piloto
 	ent = mSM->createEntity("ninja.mesh");
@@ -59,26 +59,27 @@ Avion::Avion(Ogre::SceneNode* rootNode) : EntidadIG(rootNode->createChildSceneNo
 	pilotoNode->yaw(Ogre::Degree(-180));
 	pilotoNode->setPosition(0, 80, 0);
 
-	//BillBoardSet :)
-	BillboardSet* bbSet = mSM->createBillboardSet("avion_cartel", 1);
-	bbSet->setDefaultDimensions(200, 120);
-	bbSet->setMaterialName("Practica2/Panel");
-	Billboard* bb = bbSet->createBillboard(Vector3(0, 0, -100));
+	//BillBoardSet de 1 para el cartelito que sigue al avion
+		BillboardSet* bbSet = mSM->createBillboardSet("avion_cartel", 1);
+		bbSet->setDefaultDimensions(200, 120);
+		bbSet->setMaterialName("Practica2/Panel");
+		/*Billboard* bb = */bbSet->createBillboard(Vector3(0, 0, -100));
+		colaNode = mNode->createChildSceneNode("Cola");
+		colaNode->setPosition(0, 0, -250);
+		colaNode->attachObject(bbSet);
 
-	colaNode = mNode->createChildSceneNode("Cola");
-	colaNode->setPosition(0, 0, -250);
-	colaNode->attachObject(bbSet);
+	//Sistemas de particulas
+		psNode = mNode->createChildSceneNode("psAvion");
 
-	//Explosion
-	pSys = mSM->createParticleSystem("psPumPum", "Practica2/Explosion");
-	pSys->setEmitting(false);
-	psNode = mNode->createChildSceneNode("psAvion");
-	psNode->attachObject(pSys);
+		//Explosion
+		pSys = mSM->createParticleSystem("psPumPum", "Practica2/Explosion");
+		pSys->setEmitting(false);
+		psNode->attachObject(pSys);
 
-	//estela
-	smokeTrail = mSM->createParticleSystem("psTrail", "Practica2/SmokeTrail");
-	smokeTrail->setEmitting(true);
-	psNode->attachObject(smokeTrail);
+		//estela
+		smokeTrail = mSM->createParticleSystem("psTrail", "Practica2/SmokeTrail");
+		smokeTrail->setEmitting(true);
+		psNode->attachObject(smokeTrail);
 }
 
 bool Avion::keyPressed(const OgreBites::KeyboardEvent& evt)
@@ -107,7 +108,7 @@ void Avion::frameRendered(const Ogre::FrameEvent& evt)
 void Avion::receiveEvent(EntidadIG* entidad, msgType evt)
 {
 	if (evt == msgType::r_pressed) {
-
+		//Hacer invisible al avion
 		cuerpoNode->setVisible(false);
 		alaINode->setVisible(false);
 		heliceI->getmNode()->setVisible(false);
@@ -118,6 +119,7 @@ void Avion::receiveEvent(EntidadIG* entidad, msgType evt)
 		colaNode->setVisible(false);
 		moving = false;
 
+		//Sistemas de particulas
 		pSys->setEmitting(true);
 		smokeTrail->setEmitting(false);
 	}

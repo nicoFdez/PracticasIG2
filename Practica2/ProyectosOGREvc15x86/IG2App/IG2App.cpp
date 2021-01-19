@@ -59,6 +59,7 @@ void IG2App::createObjects()
 	{
 	case 0: {
 
+		//Se crea la malla de la cual se hacen las entities de Plane (y por ello de también de Rio)
 		MeshManager::getSingleton().createPlane("mPlane1080x800",
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			Plane(Vector3::UNIT_Y, 0),
@@ -112,7 +113,7 @@ void IG2App::createObjects()
 		mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -20),
 			"Practica2/spaceGSLS", 1, 1, true, 1.0, 10, 10);
 
-		/*
+		/* Descomentar para cambiar distancias y hacer el bow (curvatura) 0.0
 			mSM->setSkyPlane(true, Plane(Vector3::UNIT_Z, -200),
 				"Practica2/space", 1, 1, true, 0.0, 10, 10);
 		*/
@@ -164,17 +165,18 @@ void IG2App::setupScene(void)
 	Viewport* vp = getRenderWindow()->addViewport(cam);
 	vp->setBackgroundColour(Ogre::ColourValue(.0, .0, .0));
 
-	//Luminance
-	CompositorManager::getSingleton().addCompositor(vp,
-		"Practica2/Luminance");
-	CompositorManager::getSingleton().setCompositorEnabled(vp,
-		"Practica2/Luminance", luminance);
+	//Compositors
+		//Luminance
+		CompositorManager::getSingleton().addCompositor(vp,
+			"Practica2/Luminance");
+		CompositorManager::getSingleton().setCompositorEnabled(vp,
+			"Practica2/Luminance", luminance);
 
-	//EdgeEmboss
-	CompositorManager::getSingleton().addCompositor(vp,
-		"Practica2/EdgeEmboss");
-	CompositorManager::getSingleton().setCompositorEnabled(vp,
-		"Practica2/EdgeEmboss", edgeEmboss);
+		//EdgeEmboss
+		CompositorManager::getSingleton().addCompositor(vp,
+			"Practica2/EdgeEmboss");
+		CompositorManager::getSingleton().setCompositorEnabled(vp,
+			"Practica2/EdgeEmboss", edgeEmboss);
 
 	//------------------------------------------------------------------------
 
@@ -193,6 +195,7 @@ void IG2App::setupScene(void)
 	mLightNode->setDirection(Ogre::Vector3(0, -1, -1));  //vec3.normalise();
 	//lightNode->setPosition(0, 0, 1000);
 
+	//Luz ambiente
 	mSM->setAmbientLight(Ogre::ColourValue(0.2, 0.2, 0.2));
 
 	//------------------------------------------------------------------------

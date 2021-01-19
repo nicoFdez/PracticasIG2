@@ -48,6 +48,7 @@ protected:
 	Ogre::SceneNode* mCamNode = nullptr;
 	OgreBites::CameraMan* mCamMgr = nullptr;
 
+	//Boleanas de control de compositors
 	bool luminance = false;
 	bool edgeEmboss = false;
 };
