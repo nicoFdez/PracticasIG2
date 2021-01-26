@@ -3,6 +3,7 @@ layout (triangles) in; // procesa un triángulo: recibe 1 triángulo y
 layout (triangle_strip, max_vertices = 3) out; // emite 1 triángulo
 
 uniform mat4 modelViewProjMat; // para pasar a Clip-Space
+
 uniform float Tiempo; //Para ir incrementando la escala
 const float VD = 50; // longitud del desplazamiento
 
