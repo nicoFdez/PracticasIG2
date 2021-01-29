@@ -12,7 +12,6 @@ uniform float Tiempo; //Para ir aumentando la escala
 const float VD = 50; // longitud del desplazamiento
 
 in vec2[] vUv0;
-in vec3[] vVertex;
 in vec3[] vNormal;
 
 out vec2 vUvF;
@@ -29,20 +28,17 @@ vec3 rotate(vec3 posDes, float angle){
     return posDes * mat3(cos(angle), 0, sin(angle), 0,1,0,-sin(angle),0, cos(angle));
 }
 
-vec3 normalVec(vec3 vertex[3]) { 
-    return normalize(cross(vertex[1] - vertex[0], vertex[2] - vertex[1]));
-} // vector normal al triángulo
-
 void main() {
     vec3 vertices[3] = vec3[]( gl_in[0].gl_Position.xyz * Tiempo, gl_in[1].gl_Position.xyz* Tiempo, gl_in[2].gl_Position.xyz * Tiempo );
+    vec3 normales[3] = vec3[]( vNormal[0], vNormal[1], vNormal[2] );
 
-    for(int i = 0; i < 3; ++i)
+    for(int i = 0; i < 3; ++i){
         vertices[i] = rotate(vertices[i], Tiempo2PI);
+        normales[i] = rotate(normales[i], Tiempo2PI);
+    }
 
     vec3 barycenter = barycenter(vertices);
     vec3 dir = normalize(barycenter);
-   
-    vNormalF = normalize(vec3(normalMat * vec4(normalVec(vertices),0)));
 
     for (int i=0; i<3; ++i) { // para emitir 3 vértices
         vec3 posDes = vertices[i] + dir * (VD * Tiempo);
@@ -53,7 +49,8 @@ void main() {
         //Multiplicamos por dos las coordenadas de la textura para que no se vea tan pequeña
         vUvF = vUv0[i] * 2;
 
-        vVertexF = modelViewMat * posDes;
+        vVertexF = vec3(vec4(posDes,0) * modelViewMat);
+        vNormalF = vec3(vec4(normales[i],0) * normalMat);
         
         EmitVertex();
     }

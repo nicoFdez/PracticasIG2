@@ -3,12 +3,13 @@ layout (triangles) in; // procesa un triángulo: recibe 1 triángulo y
 layout (triangle_strip, max_vertices = 3) out; // emite 1 triángulo
 
 uniform mat4 modelViewProjMat; // para pasar a Clip-Space
+uniform mat4 modelViewMat;
+uniform mat4 normalMat;
 
 uniform float Tiempo; //Para ir incrementando la escala
 const float VD = 50; // longitud del desplazamiento
 
 in vec2[] vUv0;
-in vec3[] vVertex;
 in vec3[] vNormal;
 
 out vec2 vUvF;
@@ -34,8 +35,8 @@ void main() {
         vUvF = vUv0[i] * 2;
 
         //Definicion final y emision del vertice
-        vVertexF = vVertex[i];
-        vNormalF = vNormal[i];
+        vVertexF = vec3(vec4(posDes,0) * modelViewMat);
+        vNormalF = vec3(vec4(vNormal[i],0) * normalMat);
         EmitVertex();
     }
     EndPrimitive();

@@ -49,7 +49,7 @@ void main() {
     else {
         //Calculo de componente difusa
         materialDiffuse = vec3(texture(texturaInside, vUvF));    
-        diffuse = diff(vVertexF, vNormalF) * lightDiffuse * materialDiffuse;
+        diffuse = diff(vVertexF, -vNormalF) * lightDiffuse * materialDiffuse;
         //Calculo de componente ambiente
         ambient = lightAmbient * materialDiffuse;
         //Definicion del color y mezcla con la textura
